@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper@8/swiper-bundle.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <section class="flex">
+        <a href="home.html" class="logo">RESTAURENT</a>
+        <nav class="navbar">
+          <a href="home.html">home</a>
+          <a href="menu.html">menu</a>
+          <a href="orders.html">orders</a>
+          <a href="cart.html">your cart</a>
+          <a href="profile.html">profile</a>
+        </nav>
+        <div class="icons">
+          <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+          <div id="user-btn" class="fas fa-user"></div>
+          <div id="menu-btn" class="fas fa-bars"></div>
+        </div>
+        <div class="profile">
+          <p class="name">Mamdo Bhoot</p>
+          <div class="flex">
+            <a href="profile.html" class="btn">profile</a>
+            <a href="#" class="delete-btn">logout</a>
+          </div>
+          <p class="account">
+            <a href="login.html">login</a> or
+            <a href="register.html">register</a>
+          </p>
+        </div>
+      </section>
+    </header>
+
+    <section class="err">
+      <img src="images/404.jpg" alt="Error" />
+      <p>Page not found ☹️</p>
+    </section>
+
+    <div class="loader">
+      <img id="pizza" src="images/pizza-loading.svg" alt="loading screen" />
+      <p class="loading">Loading...</p>
+    </div>
+
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <script src="js/script.js"></script>
+
+    <!-- <script>
+      var swiper = new Swiper(".home-slider", {
+        loop: true,
+        grabCursor: true,
+        effect: "flip",
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+      });
+    </script> -->
+  </body>
+</html>
