@@ -32,16 +32,24 @@
           <div id="menu-btn" class="fas fa-bars"></div>
         </div>
         <div class="profile">
-          <p class="name">bhoot</p>
+          <% if(user.id !== null){ %> 
+             <p class="name"><%=user.firstname %></p>
+             <div class="flex">
+                <a href="profile" class="btn">profile</a>
+                <a href="logout" class="delete-btn">logout</a>
+             </div>
+          <%
+             }
+          else {
+          %>
           <div class="flex">
-            <a href="profile" class="btn">profile</a>
-            <a href="logout" class="delete-btn">logout</a>
+             <a href="login" class="btn">login</a>
+             <a href="register" class="delete-btn">register</a>
           </div>
-          <p class="account">
-            <a href="login">login</a> or
-            <a href="register">register</a>
-          </p>
-        </div>
+          <%
+          }
+          %>
+       </div>
       </section>
     </header>
     <section class="showcase">

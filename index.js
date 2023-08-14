@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(session({
 	secret : '1234567890abcdefghijklmnopqrstuvwxyz',
 	resave : false,
-	saveUninitialized : true,
+	saveUninitialized : false,
 	cookie : { secure : false }
 }));
 
@@ -32,16 +32,6 @@ app.use(cookieParser());
 
 app.set('views', './views');
 app.set('view engine', 'ejs');
-
-// let user = {
-//     id : null,
-//     firstname : null,
-//     lastname : null,
-//     phone : null,
-//     address : null,
-//     email : null,
-//     password : null
-// }
 
 
 app.get("/", (req,res)=>{
@@ -51,8 +41,7 @@ app.get("/", (req,res)=>{
 })
 
 app.get("/home", (req,res)=>{
-    console.log(session.user);
-
+ 
     const query = "SELECT * FROM menu LIMIT 3";    
 
 	db.query(query, (err, data)=>{
@@ -65,6 +54,14 @@ app.get("/home", (req,res)=>{
 
                 if(err) return res.json(err)
                 else {
+                    console.log(req.session.user)
+                    if(!req.session.user){
+                        // console.log("login nei ");
+                        req.session.user = {
+                            id : null
+                        }
+                    }
+                    //console.log(req.session.user);
                     res.render('home', {user: req.session.user, data:data, category:category})
                 }
             })
@@ -72,21 +69,11 @@ app.get("/home", (req,res)=>{
 	});
 })
 
-app.get("/menu", (req,res)=>{
-    const query = "SELECT * FROM menu";    
-
-	db.query(query, (err, data)=>{
-
-		if(err) return res.json(err) 
-		else {
-			res.render('menu', {user: req.session.user, data:data})
-		}
-
-	});
-})
-
 app.get("/login", (req,res)=>{
-    res.render('login', {})
+    if(!req.session.user || req.session.user.id === null){
+        req.session.user = {id : null}
+    }
+    res.render('login', {user:req.session.user})
 })
 
 app.post("/login", (req,res)=>{
@@ -101,8 +88,7 @@ app.post("/login", (req,res)=>{
             }
             else{
                 req.session.user = data[0];
-                res.locals.user = req.session.user;
-                ///console.log(res.locals.user);
+                // res.locals.user = req.session.user;
                 console.log(`Welcome ${data[0].firstname}!`)
                 res.redirect('home');
             }
@@ -110,7 +96,25 @@ app.post("/login", (req,res)=>{
     })
 })
 
+app.get("/menu", (req,res)=>{
+    const query = "SELECT * FROM menu";    
 
+	db.query(query, (err, data)=>{
+
+		if(err) return res.json(err) 
+		else {
+            if(!req.session.user || req.session.user.id === null){
+                req.session.user = {
+                    id : null
+                }
+            }
+			res.render('menu', {user: req.session.user, data:data})
+		}
+
+	});
+})
+
+// for admin
 app.post("/menu", (req,res)=>{
     const q = "INSERT INTO menu (title, content, type, price) VALUES (?)";
     const values = [
@@ -129,35 +133,60 @@ app.post("/menu", (req,res)=>{
 })
 
 app.get("/profile", (req,res)=>{
-    res.render('profile', {})
+    if(!req.session.user || req.session.user.id === null){
+        req.session.user = {id : null}
+        res.redirect('login')
+    }
+    else res.render('profile', {user:req.session.user})
 })
 
 app.get("/checkout", (req,res)=>{
-    res.render('checkout', {})
+    if(!req.session.user || req.session.user.id === null){
+        req.session.user = {id : null}
+        res.redirect('login')
+    }
+    else res.render('checkout', {user:req.session.user})
 })
 
 app.get("/update_profile", (req,res)=>{
-    res.render('update_profile', {})
+    if(!req.session.user || req.session.user.id === null){
+        req.session.user = {id : null}
+        res.redirect('login')
+    }
+    else res.render('update_profile', {user:req.session.user})
 })
 
 app.post("/update_profile", (req,res)=>{
-    res.render('update_profile', {})
+ // kaj baki
 })
 
 app.get("/error_page", (req,res)=>{
-    res.render('error_page', {})
+    if(!req.session.user || req.session.user.id === null){
+        req.session.user = {id : null}
+    }
+    else res.render('error_page', {user:req.session.user})
 })
 
 app.get("/cart", (req,res)=>{
-    res.render('cart', {})
+    if(!req.session.user || req.session.user.id === null){
+        req.session.user = {id : null}
+        res.redirect('login')
+    }
+    else res.render('cart', {user:req.session.user})
 })
 
 app.get("/orders", (req,res)=>{
-    res.render('orders', {})
+    if(!req.session.user || req.session.user.id === null){
+        res.redirect('login')
+    }
+    else res.render('orders', {user:req.session.user})
 })
 
 app.get("/register", (req,res)=>{
-    res.render('register', {})
+    if(!req.session.user || req.session.user.id === null){
+        req.session.user = {id : null}
+    }
+    res.render('register', {user:req.session.user})
 })
 
 app.post("/register", (req,res)=>{
@@ -176,7 +205,17 @@ app.post("/register", (req,res)=>{
         if(err) return res.json(err)
         else {
             console.log("customer acc creation successful");
-            res.redirect('home');
+
+            const q1 = `SELECT * FROM customers WHERE email = '${req.body.email}' AND password = '${req.body.pass}'`;
+
+            db.query(q1, (err, data)=>{
+                if(err) return res.json(err)
+                else {
+                    req.session.user = data[0];
+                    console.log(`Welcome ${data[0].firstname}!`)
+                    res.redirect('home');
+                } 
+            })
         } 
     })
 })
@@ -193,8 +232,12 @@ app.get("/:id", (req,res)=>{
     db.query(q, (err, data)=>{
         if(err) return res.json(err)
         else {
-            console.log(data);
-            res.render('category', {data:data, category:req.params.id})
+            if(!req.session.user || req.session.user.id === null){
+                req.session.user = {
+                    id : null
+                }
+            }
+            res.render('category', {user: req.session.user, data:data, category:req.params.id})
         } 
     })
 })

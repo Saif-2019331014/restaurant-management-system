@@ -37,12 +37,23 @@
       </div>
 
       <div class="profile">
-         <p class="name">shaikh anas</p>
+         <% if(user.id !== null){ %> 
+            <p class="name"><%=user.firstname %></p>
+            <div class="flex">
+               <a href="profile" class="btn">profile</a>
+               <a href="logout" class="delete-btn">logout</a>
+            </div>
+         <%
+            }
+         else {
+         %>
          <div class="flex">
-            <a href="profile" class="btn">profile</a>
-            <a href="#" class="delete-btn">logout</a>
+            <a href="login" class="btn">login</a>
+            <a href="register" class="delete-btn">register</a>
          </div>
-         <p class="account"><a href="login">login</a> or <a href="register">register</a></p>
+         <%
+         }
+         %>
       </div>
 
    </section>
@@ -51,7 +62,7 @@
 
 <section class="form-container">
 
-   <form action="" method="POST">
+   <form action="/update_profile" method="POST">
       <h3>update profile</h3>
       <input type="text" required maxlength="20" name="name" placeholder="enter your name" class="box" oninput="this.value = this.value.replace(/\s/g, '')" value="shaikh anas">
       <input type="email" required maxlength="50" name="email" placeholder="enter your email" class="box" oninput="this.value = this.value.replace(/\s/g, '')" value="shaikhanas@gmai.com">

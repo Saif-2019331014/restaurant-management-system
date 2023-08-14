@@ -37,12 +37,23 @@
       </div>
 
       <div class="profile">
-         <p class="name">shaikh anas</p>
+         <% if(user.id !== null){ %> 
+            <p class="name"><%=user.firstname %></p>
+            <div class="flex">
+               <a href="profile" class="btn">profile</a>
+               <a href="logout" class="delete-btn">logout</a>
+            </div>
+         <%
+            }
+         else {
+         %>
          <div class="flex">
-            <a href="profile" class="btn">profile</a>
-            <a href="#" class="delete-btn">logout</a>
+            <a href="login" class="btn">login</a>
+            <a href="register" class="delete-btn">register</a>
          </div>
-         <p class="account"><a href="login">login</a> or <a href="register">register</a></p>
+         <%
+         }
+         %>
       </div>
 
    </section>
@@ -51,7 +62,7 @@
 
 <div class="heading">
    <h3>your orders</h3>
-   <p><a href="home.html">home </a> <span> / orders</span></p>
+   <p><a href="home">home </a> <span> / orders</span></p>
 </div>
 
 <section class="orders">
