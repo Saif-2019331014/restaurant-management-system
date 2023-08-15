@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>food menu</title>
 
-    <!-- font awesome cdn link  -->
+    <!-- font awesome cdn link -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     />
 
-    <!-- custom css file link  -->
+    <!-- custom css file link -->
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
@@ -31,11 +31,19 @@
             <div id="menu-btn" class="fas fa-bars"></div>
           </div>
           <div class="profile">
+            <% if(user.id !== null){ %>
             <p class="name"><%=user.firstname %></p>
             <div class="flex">
               <a href="profile" class="btn">profile</a>
               <a href="logout" class="delete-btn">logout</a>
             </div>
+            <% } else { %>
+            <p class="name">Please login or register</p>
+            <div class="flex">
+              <a href="login" class="btn">login</a>
+              <a href="register" class="delete-btn">register</a>
+            </div>
+            <% } %>
           </div>
         </div>
       </section>
@@ -85,40 +93,40 @@
     <footer class="footer">
       <section class="box-container">
         <div class="box">
-          <img src="images/email-icon.png" alt="" />
-          <h3>our email</h3>
-          <a href="mailto:shaikhanas@gmail.com">shaikhanas@gmail.com</a>
-          <a href="mailto:anasbhai@gmail.com">anasbhai@gmail.com</a>
+          <img src="images/map-icon.png" alt="" />
+          <h3>Find us in</h3>
+          <a href="#">Mirpur, Dhaka</a>
+          <a href="#">Anderkilla, Chittagong</a>
         </div>
 
         <div class="box">
           <img src="images/clock-icon.png" alt="" />
-          <h3>opening hours</h3>
-          <p>00:07am to 00:10pm</p>
+          <h3>We're open</h3>
+          <p>Everyday</p>
+          <p>from 07am to 10pm</p>
         </div>
 
         <div class="box">
-          <img src="images/map-icon.png" alt="" />
-          <h3>our address</h3>
-          <a href="https://www.google.com/maps">mumbai, india - 400104</a>
+          <img src="images/email-icon.png" alt="" />
+          <h3>Email</h3>
+          <a href="mailto:laratatoulli@gmail.com">laratatoulli@gmail.com</a>
+          <a href="mailto:laratatoulli@outlook.com">laratatoulli@outlook.com</a>
         </div>
 
         <div class="box">
           <img src="images/phone-icon.png" alt="" />
-          <h3>our number</h3>
-          <a href="tel:1234567890">+123-456-7890</a>
-          <a href="tel:1112223333">+111-222-3333</a>
+          <h3>Phone</h3>
+          <p>+880 1521-703875</p>
+          <p>+880 1640-922106</p>
         </div>
       </section>
 
-      <div class="credit">
-        &copy; copyright @ 2022 by <span>mr. web designer</span> | all rights
-        reserved!
-      </div>
+      <div class="credit">Made with ❤️ by <span>Mitu & Saif</span></div>
     </footer>
 
     <div class="loader">
-      <img src="images/loader.gif" alt="" />
+      <img id="pizza" src="images/pizza-loading.svg" alt="loading screen" />
+      <p class="loading">Loading...</p>
     </div>
 
     <script src="js/script.js"></script>

@@ -68,24 +68,190 @@
         <a href="#">see the menu</a>
       </div>
     </section>
+    
     <section class="category">
       <h1 class="title">food category</h1>
-
       <div class="box-container">
         <% if(category.length > 0) { category.forEach(function(category){ %>
         <a href="<%= category.type %>" class="box">
           <img src="images/cat-1.png" alt="" />
           <h3><%= category.type %></h3>
         </a>
-
         <% }); } %>
       </div>
     </section>
 
     <section class="products">
       <h1 class="title">MENU</h1>
+      <div class="swiper reviews-slider">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide slide">
+            <form accept="" method="post" class="box">
+              <a href="quick_view.html" class="fas fa-eye"></a>
+              <button
+                class="fas fa-shopping-cart"
+                type="submit"
+                name="add_to_cart"
+              ></button>
+              <img src="images/food.jpeg" alt="" />
+              <a href="category.html" class="cat">pizza</a>
+              <div class="name">Margherita</div>
+              <div class="flex">
+                <div class="price">
+                  <span>BDT</span>500<span>/-</span>
+                </div>
+                <input
+                  type="number"
+                  name="qty"
+                  class="qty"
+                  min="1"
+                  max="99"
+                  value="1"
+                  onkeypress="if(this.value.length == 2) return false;"
+                />
+              </div>
+            </form>
+          </div>
+          <div class="swiper-slide slide">
+            <form accept="" method="post" class="box">
+              <a href="quick_view.html" class="fas fa-eye"></a>
+              <button
+                class="fas fa-shopping-cart"
+                type="submit"
+                name="add_to_cart"
+              ></button>
+              <img src="images/food.jpeg" alt="" />
+              <a href="category.html" class="cat">pizza</a>
+              <div class="name">Margherita</div>
+              <div class="flex">
+                <div class="price">
+                  <span>BDT</span>500<span>/-</span>
+                </div>
+                <input
+                  type="number"
+                  name="qty"
+                  class="qty"
+                  min="1"
+                  max="99"
+                  value="1"
+                  onkeypress="if(this.value.length == 2) return false;"
+                />
+              </div>
+            </form>
+          </div>
+          <div class="swiper-slide slide">
+            <form accept="" method="post" class="box">
+              <a href="quick_view.html" class="fas fa-eye"></a>
+              <button
+                class="fas fa-shopping-cart"
+                type="submit"
+                name="add_to_cart"
+              ></button>
+              <img src="images/food.jpeg" alt="" />
+              <a href="category.html" class="cat">pizza</a>
+              <div class="name">Margherita</div>
+              <div class="flex">
+                <div class="price">
+                  <span>BDT</span>500<span>/-</span>
+                </div>
+                <input
+                  type="number"
+                  name="qty"
+                  class="qty"
+                  min="1"
+                  max="99"
+                  value="1"
+                  onkeypress="if(this.value.length == 2) return false;"
+                />
+              </div>
+            </form>
+          </div>
+          <div class="swiper-slide slide">
+            <form accept="" method="post" class="box">
+              <a href="quick_view.html" class="fas fa-eye"></a>
+              <button
+                class="fas fa-shopping-cart"
+                type="submit"
+                name="add_to_cart"
+              ></button>
+              <img src="images/food.jpeg" alt="" />
+              <a href="category.html" class="cat">pizza</a>
+              <div class="name">Margherita</div>
+              <div class="flex">
+                <div class="price">
+                  <span>BDT</span>500<span>/-</span>
+                </div>
+                <input
+                  type="number"
+                  name="qty"
+                  class="qty"
+                  min="1"
+                  max="99"
+                  value="1"
+                  onkeypress="if(this.value.length == 2) return false;"
+                />
+              </div>
+            </form>
+          </div>
+          <div class="swiper-slide slide">
+            <form accept="" method="post" class="box">
+              <a href="quick_view.html" class="fas fa-eye"></a>
+              <button
+                class="fas fa-shopping-cart"
+                type="submit"
+                name="add_to_cart"
+              ></button>
+              <img src="images/food.jpeg" alt="" />
+              <a href="category.html" class="cat">pizza</a>
+              <div class="name">Margherita</div>
+              <div class="flex">
+                <div class="price">
+                  <span>BDT</span>500<span>/-</span>
+                </div>
+                <input
+                  type="number"
+                  name="qty"
+                  class="qty"
+                  min="1"
+                  max="99"
+                  value="1"
+                  onkeypress="if(this.value.length == 2) return false;"
+                />
+              </div>
+            </form>
+          </div>
+          <div class="swiper-slide slide">
+            <form accept="" method="post" class="box">
+              <a href="quick_view.html" class="fas fa-eye"></a>
+              <button
+                class="fas fa-shopping-cart"
+                type="submit"
+                name="add_to_cart"
+              ></button>
+              <img src="images/food.jpeg" alt="" />
+              <a href="category.html" class="cat">pizza</a>
+              <div class="name">Margherita</div>
+              <div class="flex">
+                <div class="price">
+                  <span>BDT</span>500<span>/-</span>
+                </div>
+                <input
+                  type="number"
+                  name="qty"
+                  class="qty"
+                  min="1"
+                  max="99"
+                  value="1"
+                  onkeypress="if(this.value.length == 2) return false;"
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
 
-      <div class="box-container">
+      <!-- <div class="box-container">
         <% if(data.length > 0) { data.forEach(function(data){ %>
 
         <form accept="" method="post" class="box">
@@ -100,7 +266,7 @@
           <div class="name"><%= data.title %></div>
           <div class="flex">
             <div class="price">
-              <span>BDT</span><%= data.price %><span>/-</span>
+              <span>BDT</span><%= ' '+data.price %><span>/-</span>
             </div>
             <input
               type="number"
@@ -115,7 +281,7 @@
         </form>
 
         <% }); } %>
-      </div>
+      </div> -->
 
       <div class="more-btn">
         <a href="menu" class="btn">view all</a>
@@ -165,18 +331,27 @@
     </div>
 
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
-    <script src="js/script.js"></script>
-
-    <!-- <script>
-      var swiper = new Swiper(".home-slider", {
+    <script>
+      var swiper = new Swiper(".reviews-slider", {
         loop: true,
         grabCursor: true,
-        effect: "flip",
+        spaceBetween: 20,
         pagination: {
           el: ".swiper-pagination",
-          clickable: true,
+        },
+        breakpoints: {
+          550: {
+            slidesPerView: 1,
+          },
+          768: {
+            slidesPerView: 2,
+          },
+          1024: {
+            slidesPerView: 3,
+          },
         },
       });
-    </script> -->
+    </script>
+    <script src="js/script.js"></script>
   </body>
 </html>
