@@ -1,5 +1,6 @@
-@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap");
 
 :root {
   --yellow: #fed330;
@@ -40,6 +41,10 @@ html {
   scroll-padding-top: 8rem;
 }
 
+body {
+  margin-top: 6.7rem;
+}
+
 ::-webkit-scrollbar {
   height: 0.5rem;
   width: 1rem;
@@ -67,7 +72,16 @@ html {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.8;
+  z-index: -2;
+}
+
+.showcase .alpha {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.25);
   z-index: -1;
 }
 
@@ -186,7 +200,7 @@ section {
 }
 
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -200,32 +214,40 @@ section {
   align-items: center;
   justify-content: space-between;
   position: relative;
+  padding: 0.75em;
 }
 
 .header .flex .logo {
-  font-size: 2.5rem;
+  font-size: 4rem;
   color: var(--black);
+  font-family: "Amatic SC", sans-serif;
 }
 
-.header .flex .navbar a {
+.header .flex .right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header .flex .right .navbar a {
   margin: 0 1rem;
   font-size: 2rem;
   color: var(--black);
 }
 
-.header .flex .navbar a:hover {
-  color: var(--yellow);
+.header .flex .right .navbar a:hover {
+  color: var(--blue);
 }
 
-.header .flex .icons > * {
+.header .flex .right .icons > * {
   font-size: 2.5rem;
   color: var(--black);
   margin-left: 1.5rem;
   cursor: pointer;
 }
 
-.header .flex .icons > *:hover {
-  color: var(--yellow);
+.header .flex .right .icons > *:hover {
+  color: var(--blue);
 }
 
 @keyframes fadeIn {
@@ -234,7 +256,7 @@ section {
   }
 }
 
-.header .flex .profile {
+.header .flex .right .profile {
   width: 30rem;
   position: absolute;
   top: 120%;
@@ -247,16 +269,16 @@ section {
   animation: fadeIn 0.2s linear;
 }
 
-.header .flex .profile.active {
+.header .flex .right .profile.active {
   display: block;
 }
 
-.header .flex .profile .name {
+.header .flex .right .profile .name {
   font-size: 1.7rem;
   margin-bottom: 0.5rem;
 }
 
-.header .flex .profile .account {
+/* .header .flex .profile .account {
   font-size: 1.7rem;
   color: var(--light-color);
   margin-top: 1.5rem;
@@ -269,7 +291,7 @@ section {
 
 .header .flex .profile .account a:hover {
   color: var(--yellow);
-}
+} */
 
 #menu-btn {
   display: none;
@@ -911,14 +933,15 @@ section {
 .footer .credit {
   background-color: var(--black);
   text-align: center;
-  padding: 3rem 2rem;
+  padding: 1rem;
   font-size: 2rem;
   color: var(--white);
-  /* padding-bottom: 10rem; */
 }
 
 .footer .credit span {
   color: var(--blue);
+  font-family: "Caveat", cursive;
+  font-size: 3rem;
 }
 
 .loader {
@@ -944,8 +967,8 @@ section {
 }
 
 .loading {
-  font-family: "Rubik", sans-serif;
-  font-size: 2em;
+  font-family: "Caveat", cursive;
+  font-size: 4rem;
   margin: 0;
 }
 
@@ -976,7 +999,7 @@ section {
     display: inline-block;
   }
 
-  .header .flex .navbar {
+  .header .flex .right .navbar {
     position: absolute;
     top: 99%;
     left: 0;
@@ -985,13 +1008,15 @@ section {
     border-bottom: var(--border);
     background-color: var(--white);
     clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    display: flex;
+    flex-direction: column;
   }
 
-  .header .flex .navbar.active {
+  .header .flex .right .navbar.active {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   }
 
-  .header .flex .navbar a {
+  .header .flex .right .navbar a {
     display: block;
     margin: 2rem;
   }
