@@ -31,17 +31,17 @@
             <div id="menu-btn" class="fas fa-bars"></div>
           </div>
           <div class="profile">
-            <% if(user.id !== null){ %>
-            <p class="name"><%=user.firstname %></p>
-            <div class="flex">
-              <a href="profile" class="btn">profile</a>
-              <a href="logout" class="delete-btn">logout</a>
-            </div>
-            <% } else { %>
+            <% if(!user){ %>
             <p class="name">Please login or register</p>
             <div class="flex">
               <a href="login" class="btn">login</a>
               <a href="register" class="delete-btn">register</a>
+            </div>
+            <% } else { %>
+            <p class="name"><%=user.firstname %></p>
+            <div class="flex">
+              <a href="profile" class="btn">profile</a>
+              <a href="logout" class="delete-btn">logout</a>
             </div>
             <% } %>
           </div>
@@ -49,7 +49,7 @@
       </section>
     </header>
 
-    <div class="heading">
+    <!-- <div class="heading">
       <h3>our menu</h3>
       <p><a href="">home </a> <span> / menu</span></p>
     </div>
@@ -66,6 +66,47 @@
             class="fas fa-shopping-cart"
             type="submit"
             name="add_to_cart"
+          ></button>
+          <img src="images/food.jpeg" alt="" />
+          <a href="category.html" class="cat"><%= data.type %></a>
+          <div class="name"><%= data.title %></div>
+          <div class="flex">
+            <div class="price">
+              <span>BDT</span><%= data.price %><span>/-</span>
+            </div>
+            <input
+              type="number"
+              name="qty"
+              class="qty"
+              min="1"
+              max="99"
+              value="1"
+              onkeypress="if(this.value.length == 2) return false;"
+            />
+          </div>
+        </form>
+
+        <% }); } %>
+      </div>
+    </section> -->
+
+    <div class="heading">
+      <h3>our menu</h3>
+      <p><a href="">home </a> <span> / menu</span></p>
+    </div>
+    <section class="products">
+      <h1 class="title">latest dishes</h1>
+
+      <div class="box-container">
+        <% if(data.length > 0) { data.forEach(function(data){ %>
+
+        <form action="/addToCart" method="post" class="box">
+          <!-- <a href="quick_view.html" class="fas fa-eye"></a> -->
+          <button
+            class="fas fa-shopping-cart"
+            type="submit"
+            name="id"
+            value="<%=data.id%>"
           ></button>
           <img src="images/food.jpeg" alt="" />
           <a href="category.html" class="cat"><%= data.type %></a>

@@ -31,17 +31,17 @@
             <div id="menu-btn" class="fas fa-bars"></div>
           </div>
           <div class="profile">
-            <% if(user.id !== null){ %>
-            <p class="name"><%=user.firstname %></p>
-            <div class="flex">
-              <a href="profile" class="btn">profile</a>
-              <a href="logout" class="delete-btn">logout</a>
-            </div>
-            <% } else { %>
+            <% if(!user){ %>
             <p class="name">Please login or register</p>
             <div class="flex">
               <a href="login" class="btn">login</a>
               <a href="register" class="delete-btn">register</a>
+            </div>
+            <% } else { %>
+            <p class="name"><%=user.firstname %></p>
+            <div class="flex">
+              <a href="profile" class="btn">profile</a>
+              <a href="logout" class="delete-btn">logout</a>
             </div>
             <% } %>
           </div>

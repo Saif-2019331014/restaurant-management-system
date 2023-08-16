@@ -1142,7 +1142,9 @@ section {
 }
 
 .loading {
-  font-family: "Caveat", cursive;
+  /* font-family: "Caveat", cursive; */
+  font-family: "Rubik", sans-serif;
+  font-weight: 300;
   font-size: 4rem;
   margin: 0;
 }

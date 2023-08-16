@@ -31,17 +31,17 @@
             <div id="menu-btn" class="fas fa-bars"></div>
           </div>
           <div class="profile">
-            <% if(user.id !== null){ %>
-            <p class="name"><%=user.firstname %></p>
-            <div class="flex">
-              <a href="profile" class="btn">profile</a>
-              <a href="logout" class="delete-btn">logout</a>
-            </div>
-            <% } else { %>
+            <% if(!user){ %>
             <p class="name">Please login or register</p>
             <div class="flex">
               <a href="login" class="btn">login</a>
               <a href="register" class="delete-btn">register</a>
+            </div>
+            <% } else { %>
+            <p class="name"><%=user.firstname %></p>
+            <div class="flex">
+              <a href="profile" class="btn">profile</a>
+              <a href="logout" class="delete-btn">logout</a>
             </div>
             <% } %>
           </div>
@@ -68,7 +68,7 @@
         <a href="#">see the menu</a>
       </div>
     </section>
-    
+
     <section class="category">
       <h1 class="title">food category</h1>
       <div class="box-container">
@@ -97,9 +97,7 @@
               <a href="category.html" class="cat">pizza</a>
               <div class="name">Margherita</div>
               <div class="flex">
-                <div class="price">
-                  <span>BDT</span>500<span>/-</span>
-                </div>
+                <div class="price"><span>BDT</span>500<span>/-</span></div>
                 <input
                   type="number"
                   name="qty"
@@ -124,9 +122,7 @@
               <a href="category.html" class="cat">pizza</a>
               <div class="name">Margherita</div>
               <div class="flex">
-                <div class="price">
-                  <span>BDT</span>500<span>/-</span>
-                </div>
+                <div class="price"><span>BDT</span>500<span>/-</span></div>
                 <input
                   type="number"
                   name="qty"
@@ -151,9 +147,7 @@
               <a href="category.html" class="cat">pizza</a>
               <div class="name">Margherita</div>
               <div class="flex">
-                <div class="price">
-                  <span>BDT</span>500<span>/-</span>
-                </div>
+                <div class="price"><span>BDT</span>500<span>/-</span></div>
                 <input
                   type="number"
                   name="qty"
@@ -178,9 +172,7 @@
               <a href="category.html" class="cat">pizza</a>
               <div class="name">Margherita</div>
               <div class="flex">
-                <div class="price">
-                  <span>BDT</span>500<span>/-</span>
-                </div>
+                <div class="price"><span>BDT</span>500<span>/-</span></div>
                 <input
                   type="number"
                   name="qty"
@@ -205,9 +197,7 @@
               <a href="category.html" class="cat">pizza</a>
               <div class="name">Margherita</div>
               <div class="flex">
-                <div class="price">
-                  <span>BDT</span>500<span>/-</span>
-                </div>
+                <div class="price"><span>BDT</span>500<span>/-</span></div>
                 <input
                   type="number"
                   name="qty"
@@ -232,9 +222,7 @@
               <a href="category.html" class="cat">pizza</a>
               <div class="name">Margherita</div>
               <div class="flex">
-                <div class="price">
-                  <span>BDT</span>500<span>/-</span>
-                </div>
+                <div class="price"><span>BDT</span>500<span>/-</span></div>
                 <input
                   type="number"
                   name="qty"
@@ -289,7 +277,6 @@
     </section>
 
     <footer class="footer">
-
       <section class="box-container">
         <div class="box">
           <img src="images/map-icon.png" alt="" />
@@ -320,9 +307,7 @@
         </div>
       </section>
 
-      <div class="credit">
-        Made with ❤️ by <span>Mitu & Saif</span>
-      </div>
+      <div class="credit">Made with ❤️ by <span>Mitu & Saif</span></div>
     </footer>
 
     <div class="loader">
@@ -340,10 +325,10 @@
           el: ".swiper-pagination",
         },
         breakpoints: {
-          550: {
+          360: {
             slidesPerView: 1,
           },
-          768: {
+          600: {
             slidesPerView: 2,
           },
           1024: {
