@@ -60,33 +60,34 @@
       <div class="box-container">
         <% if(data.length > 0) { data.forEach(function(data){ %>
 
-        <form accept="" method="post" class="box">
-          <a href="quick_view.html" class="fas fa-eye"></a>
-          <button
-            class="fas fa-shopping-cart"
-            type="submit"
-            name="add_to_cart"
-          ></button>
-          <img src="images/food.jpeg" alt="" />
-          <a href="category.html" class="cat"><%= data.type %></a>
-          <div class="name"><%= data.title %></div>
-          <div class="flex">
-            <div class="price">
-              <span>BDT</span><%= data.price %><span>/-</span>
+          <form action="/addToCart" method="post" class="box">
+            <!-- <a href="quick_view.html" class="fas fa-eye"></a> -->
+            <button
+              class="fas fa-shopping-cart"
+              type="submit"
+              name="id"
+              value="<%=data.id%>"
+            ></button>
+            <img src="images/food.jpeg" alt="" />
+            <a href="category.html" class="cat"><%= data.type %></a>
+            <div class="name"><%= data.title %></div>
+            <div class="flex">
+              <div class="price">
+                <span>BDT</span><%= data.price %><span>/-</span>
+              </div>
+              <input
+                type="number"
+                name="qty"
+                class="qty"
+                min="1"
+                max="99"
+                value="1"
+                onkeypress="if(this.value.length == 2) return false;"
+              />
             </div>
-            <input
-              type="number"
-              name="qty"
-              class="qty"
-              min="1"
-              max="99"
-              value="1"
-              onkeypress="if(this.value.length == 2) return false;"
-            />
-          </div>
-        </form>
-
-        <% }); } %>
+          </form>
+  
+          <% }); } %>
       </div>
     </section>
 

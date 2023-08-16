@@ -53,7 +53,7 @@ app.get("/", (req,res)=>{
 
 app.get("/home", (req,res)=>{
  
-    const query = "SELECT * FROM menu LIMIT 3";    
+    const query = "SELECT * FROM menu LIMIT 6";    
 
 	db.query(query, (err, data)=>{
 
@@ -147,12 +147,8 @@ app.get("/profile", (req,res)=>{
     else res.render('profile', {user:req.session.user})
 })
 
-app.get("/checkout", (req,res)=>{
-    if(!req.session.user){
-        res.redirect('login')
-    }
-    else res.render('checkout', {user:req.session.user})
-})
+
+
 
 app.get("/update_profile", (req,res)=>{
     if(!req.session.user){
@@ -173,7 +169,6 @@ app.get("/error", (req,res)=>{
 })
 
 app.get("/cart", (req,res)=>{
-    console.log(req.session)
     if(!req.session.user){
         res.redirect('login')
     }
@@ -184,14 +179,82 @@ app.get("/orders", (req,res)=>{
     if(!req.session.user){
         res.redirect('login')
     }
-    else res.render('orders', {user:req.session.user})
+    else{
+        console.log('hi ' + req.session.user.id)
+        const q = `SELECT * FROM orders WHERE customer_id = ${req.session.user.id}`;
+    
+        db.query(q, (err, data)=>{
+            if(err) return res.json(err)
+            else {
+                console.log('order list')
+                console.log(data);
+                console.log(req.session.user)
+                res.render('orders', {user: req.session.user, data:data})
+            } 
+        })
+    }
+})
+
+app.post("/checkout", (req,res)=>{
+    if(!req.session.user){
+        res.redirect('login')
+    }
+    else {
+        console.log('placing order')
+        console.log(req.session.cart)
+        let description = '';
+        let price_breakdown = '';
+        let total = 0; 
+        for(let i=0;i<req.session.cart.length;i++) {
+
+            description += req.session.cart[i].quantity + ' x ' + req.session.cart[i].title
+            if(i < req.session.cart.length-1) description += ', '
+
+            price_breakdown += req.session.cart[i].subtotal
+            if(i < req.session.cart.length-1) price_breakdown += ' + '
+
+            total += req.session.cart[i].subtotal
+
+            const q = `UPDATE menu SET orderCount = orderCount+${req.session.cart[i].quantity} WHERE title = '${req.session.cart[i].title}'`;
+
+            db.query(q, (err, data)=>{
+                if(err) {
+                    console.log(err)
+                    res.json(err)
+                }
+                else{
+                    console.log('Order count updated');
+                }     
+            })
+        }
+        req.session.cart = [];
+        const q1 = "INSERT INTO orders (customer_id, table_id, description, price_breakdown, total, createdAt, instruction, status) VALUES (?)";
+
+        const values = [
+            req.session.user.id,
+            req.body.table_no,
+            description,
+            price_breakdown,
+            total,
+            new Date().toLocaleString(),
+            req.body.instruction,
+            'placed',
+        ];
+
+        db.query(q1, [values], (err, data)=>{
+            if(err) res.json(err)
+            else{
+                res.redirect('orders')
+            }
+        })
+    }
 })
 
 app.get("/register", (req,res)=>{
     if(!req.session.user){
-        res.render('register', {})
+        res.render('register', {user:req.session.user})
     }
-    res.redirect('home')
+    else res.redirect('home') // parameter
 })
 
 app.post("/register", (req,res)=>{
@@ -232,36 +295,50 @@ app.get("/logout", (req,res)=>{
 
 app.post('/addToCart', (req,res)=>{
 
-    console.log('adding to cart')
+    if(!req.session.user){
+        res.redirect('login')
+    }
+    else{
 
-    const q = `SELECT * FROM menu WHERE id = ${req.body.id}`;
-    console.log(q);
+        console.log('adding to cart')
+        console.log(req.body)
+        const q = `SELECT * FROM menu WHERE id = ${req.body.id}`;
+        console.log(q);
 
-    db.query(q, (err, data)=>{
-        if(err) return res.json(err)
-        else{
-            if(!req.session.cart){
-                req.session.cart = [];
+        db.query(q, (err, data)=>{
+            if(err) return res.json(err)
+            else{
+                if(!req.session.cart){
+                    req.session.cart = [];
+                }
+                const title = data[0].title;
+                const price = parseFloat(data[0].price)
+                const quantity = parseInt(req.body.qty);
+                const subtotal = (price - (price * (parseFloat(data[0].discount) / 100.0)))* quantity;
+            
+                req.session.cart.push({
+                    //id : id,
+                    title : title,
+                    price : price,
+                    quantity : quantity,
+                    subtotal : subtotal
+                })
+                //console.log("hi" + req.session.user + " " + req.session.cart);
+                res.redirect('menu');
             }
-            const title = data[0].title;
-            const price = parseFloat(data[0].price)
-            console.log(typeof price);
-            const quantity = parseInt(req.body.qty);
-            console.log(typeof quantity);
-            const subtotal = (price - (price * (parseFloat(data[0].discount) / 100.0)))* quantity;
-            console.log(typeof subtotal);
-            console.log(subtotal);
-            req.session.cart.push({
-                title : title,
-                price : price,
-                quantity : quantity,
-                subtotal : subtotal
-            })
-            //console.log("hi" + req.session.user + " " + req.session.cart);
-            res.redirect('menu');
-        }
-    })
+        })
+    }
 });
+
+app.get("/clearCart", (req,res)=>{
+    if(!req.session.user){
+        res.redirect('login')
+    }
+    else{
+        req.session.cart = [];
+        res.render('cart', {user:req.session.user, cart:req.session.cart})
+    }
+})
 
 app.get("/:id", (req,res)=>{
 
