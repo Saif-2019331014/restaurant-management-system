@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin dashboard</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="loader">
+      <img id="pizza" src="images/pizza-loading.svg" alt="loading screen" />
+      <p class="loading">Loading...</p>
+    </div>
+
+    <header class="header">
+      <section class="flex">
+        <a href="#" class="logo">La Ratatouille</a>
+        <div class="right">
+          <nav>
+            <a href="admin_login" class="logout">Logout</a>
+          </nav>
+        </div>
+      </section>
+    </header>
+
+    <div class="report">
+      <h3 class="title">Admin Dashboard</h3>
+      <h4 class="title small-title">Today's order info</h4>
+      <section class="box-container">
+        <div class="box">
+          <p>Total placed orders</p>
+          <p><span>100</span></p>
+        </div>
+
+        <div class="box">
+          <p>Pending orders</p>
+          <p><span>100</span></p>
+        </div>
+
+        <div class="box">
+          <p>Served orders</p>
+          <p><span>100</span></p>
+        </div>
+
+        <div class="box">
+          <p>Completed orders</p>
+          <p><span>100</span></p>
+        </div>
+
+        <div class="box">
+          <p>Total income</p>
+          <p><span>25,000</span></p>
+        </div>
+      </section>
+    </div>
+
+    <table class="tbl">
+      <caption>
+        Recent orders
+      </caption>
+      <tr>
+        <th>Order ID</th>
+        <th>Customer ID</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Status</th>
+      </tr>
+
+      <tr>
+        <td>onek lomba order id</td>
+        <td>onek lomba customer id</td>
+        <td>onek lomba price</td>
+        <td>onek gulo order. onek jayga dorkar. hae hae onek jayga dorkar</td>
+        <td>
+          <form action="change_status" method="post">
+            <input type="hidden" name="oid" value="1" />
+            <select name="sel" class="sel" onchange="this.form.submit()">
+              <option value="pending">Pending</option>
+              <option value="served">Served</option>
+              <option value="completed">Completed</option>
+            </select>
+          </form>
+        </td>
+      </tr>
+
+      <tr>
+        <td>text</td>
+        <td>text</td>
+        <td>text</td>
+        <td>text</td>
+        <td>
+          <form action="change_status" method="post">
+            <input type="hidden" name="oid" value="2" />
+            <select name="sel" class="sel" onchange="this.form.submit()">
+              <option value="pending">Pending</option>
+              <option value="served">Served</option>
+              <option value="completed">Completed</option>
+            </select>
+          </form>
+        </td>
+      </tr>
+
+      <tr>
+        <td>text</td>
+        <td>text</td>
+        <td>text</td>
+        <td>text</td>
+        <td>
+          <form action="change_status" method="post">
+            <input type="hidden" name="oid" value="3" />
+            <select name="sel" class="sel" onchange="this.form.submit()">
+              <option value="pending">Pending</option>
+              <option value="served">Served</option>
+              <option value="completed">Completed</option>
+            </select>
+          </form>
+        </td>
+      </tr>
+
+      <tr>
+        <td>text</td>
+        <td>text</td>
+        <td>text</td>
+        <td>text</td>
+        <td>
+          <form action="change_status" method="post">
+            <input type="hidden" name="oid" value="4" />
+            <select name="sel" class="sel" onchange="this.form.submit()">
+              <option value="pending">Pending</option>
+              <option value="served">Served</option>
+              <option value="completed">Completed</option>
+            </select>
+          </form>
+        </td>
+      </tr>
+    </table>
+
+    <div class="add-item">
+      <h4 class="title small-title">Add an item</h4>
+      <section class="box-container">
+        <form action="/add_item" method="post" enctype="multipart/form-data">
+          <div class="box">
+            <div>
+              <label for="title">Item name:</label><br />
+              <input
+                type="text"
+                class="inp"
+                name="title"
+                placeholder="Item name"
+              />
+            </div>
+            <div>
+              <label for="type">Item type:</label><br />
+              <input
+                type="text"
+                class="inp"
+                name="type"
+                placeholder="Item type"
+              />
+            </div>
+            <div>
+              <label for="price">Item price:</label><br />
+              <input
+                type="text"
+                class="inp"
+                name="price"
+                placeholder="Item price"
+              />
+            </div>
+            <div>
+              <label for="image">Image:</label><br />
+              <input type="file" name="image" />
+            </div>
+            <div>
+              <button type="submit">Add item</button>
+            </div>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <script src="js/loader.js"></script>
+  </body>
+</html>
