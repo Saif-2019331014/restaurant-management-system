@@ -5,7 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin dashboard</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/admin.css" />
   </head>
   <body>
     <div class="loader">
@@ -17,9 +22,16 @@
       <section class="flex">
         <a href="#" class="logo">La Ratatouille</a>
         <div class="right">
-          <nav>
-            <a href="admin_login" class="logout">Logout</a>
+          <nav class="navbar">
+            <a href="#" id="actv">Dashboard</a>
+            <a href="/admin_order_history">Order history</a>
+            <a href="/admin_add_item">Add item</a>
+            <a href="/admin_modify_item">Modify item</a>
+            <a href="admin_stuff_login">Logout</a>
           </nav>
+          <div class="icons">
+            <div id="menu-btn" class="fas fa-bars"></div>
+          </div>
         </div>
       </section>
     </header>
@@ -136,50 +148,7 @@
       </tr>
     </table>
 
-    <div class="add-item">
-      <h4 class="title small-title">Add an item</h4>
-      <section class="box-container">
-        <form action="/add_item" method="post" enctype="multipart/form-data">
-          <div class="box">
-            <div>
-              <label for="title">Item name:</label><br />
-              <input
-                type="text"
-                class="inp"
-                name="title"
-                placeholder="Item name"
-              />
-            </div>
-            <div>
-              <label for="type">Item type:</label><br />
-              <input
-                type="text"
-                class="inp"
-                name="type"
-                placeholder="Item type"
-              />
-            </div>
-            <div>
-              <label for="price">Item price:</label><br />
-              <input
-                type="text"
-                class="inp"
-                name="price"
-                placeholder="Item price"
-              />
-            </div>
-            <div>
-              <label for="image">Image:</label><br />
-              <input type="file" name="image" />
-            </div>
-            <div>
-              <button type="submit">Add item</button>
-            </div>
-          </div>
-        </form>
-      </section>
-    </div>
-
     <script src="js/loader.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>

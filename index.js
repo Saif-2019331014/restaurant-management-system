@@ -51,6 +51,24 @@ app.get("/", (req,res)=>{
     res.redirect('home');
 })
 
+/* just wrote while working on admin section. these routes are not complete yet */
+app.get("/admin_stuff_login", (req, res)=> {
+    res.render('admin_stuff_login');
+})
+
+app.get("/admin_dashboard", (req, res)=> {
+    res.render('admin_dashboard');
+})
+
+app.get("/admin_order_history", (req, res)=> {
+    res.render('admin_order_history');
+})
+
+app.get("/admin_add_item", (req, res)=> {
+    res.render('admin_add_item');
+})
+/* admin route ends */
+
 app.get("/home", (req,res)=>{
  
     const query = "SELECT * FROM menu LIMIT 6";    

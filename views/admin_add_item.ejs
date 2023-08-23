@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add menu item</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/admin.css" />
+  </head>
+  <body>
+    <div class="loader">
+      <img id="pizza" src="images/pizza-loading.svg" alt="loading screen" />
+      <p class="loading">Loading...</p>
+    </div>
+
+    <header class="header">
+      <section class="flex">
+        <a href="#" class="logo">La Ratatouille</a>
+        <div class="right">
+          <nav class="navbar">
+            <a href="/admin_dashboard" class="links">Dashboard</a>
+            <a href="/admin_order_history" class="links">Order history</a>
+            <a href="#" class="links" id="actv">Add item</a>
+            <a href="/admin_modify_item" class="links">Modify item</a>
+            <a href="admin_stuff_login" class="links">Logout</a>
+          </nav>
+          <div class="icons">
+            <div id="menu-btn" class="fas fa-bars"></div>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <section class="form-container">
+      <form action="" method="post">
+        <div class="safety">
+          <h3>Add Item</h3>
+          <input
+            type="text"
+            required
+            maxlength="100"
+            name="name"
+            placeholder="Item name"
+            class="box"
+          />
+          <input
+            type="text"
+            required
+            maxlength="20"
+            name="type"
+            placeholder="Item type"
+            class="box"
+          />
+          <div class="box cal">
+            <label
+              for="price"
+              style="color: var(--light-color); padding-right: 1rem"
+              >Price:
+            </label>
+            <input
+              type="number"
+              required
+              min="1"
+              max="10000"
+              value="100"
+              name="price"
+              class="qty"
+              onkeypress="if(this.value.length == 5) return false;"
+            />
+          </div>
+          <div class="box cal">
+            <label
+              for="image"
+              style="color: var(--light-color); padding-right: 1rem"
+              >Item image:
+            </label>
+            <input type="file" name="image" style="font-size: 1.5rem" />
+          </div>
+          <button type="submit" class="btn">Add Item</button>
+          <!-- <input type="submit" value="login now" class="btn" name="submit" /> -->
+        </div>
+      </form>
+    </section>
+
+    <script src="js/loader.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

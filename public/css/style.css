@@ -3,8 +3,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap");
 
 :root {
-  --yellow: #fed330;
+  --yellow: #ffc107;
+  --green: #198754;
   --blue: #1da1f2;
+  --dark-blue: #0d6efd;
   --red: #e74c3c;
   --white: #fff;
   --black: #222;
@@ -24,8 +26,8 @@
 }
 
 *::selection {
-  background-color: var(--yellow);
-  color: var(--black);
+  background-color: var(--blue);
+  color: var(--white);
 }
 
 /* html,
@@ -283,16 +285,6 @@ section {
   margin-bottom: 0.5rem;
 }
 
-.header .flex .right .logout {
-  margin: 0 1rem;
-  font-size: 2rem;
-  color: var(--black);
-}
-
-.header .flex .right .logout:hover {
-  color: var(--blue);
-}
-
 /* .header .flex .profile .account {
   font-size: 1.7rem;
   color: var(--light-color);
@@ -307,6 +299,10 @@ section {
 .header .flex .profile .account a:hover {
   color: var(--yellow);
 } */
+
+#actv {
+  color: var(--blue);
+}
 
 #menu-btn {
   display: none;
@@ -913,7 +909,7 @@ section {
 .form-container form .safety h3 {
   margin: 1rem auto;
   font-size: 2.5rem;
-  text-transform: uppercase;
+  text-transform: capitalize;
   color: var(--black);
 }
 
@@ -1051,133 +1047,6 @@ section {
   color: var(--black);
 }
 
-/* Admin dashboard styles*/
-.report h3.title {
-  margin-top: 9.7rem;
-}
-
-.small-title {
-  font-size: 3rem;
-  text-decoration: none;
-  margin-top: 1rem;
-  margin-bottom: 0;
-  font-weight: 400;
-}
-
-.report .box-container {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.report .box-container .box {
-  padding: 2rem;
-  min-width: 20rem;
-  border: 0.2rem solid #f1f1f1;
-  border-radius: 0.25rem;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-}
-
-.report .box-container .box p {
-  font-size: 2rem;
-  display: flex;
-}
-
-.report .box-container .box p span {
-  font-size: 4rem;
-  margin-left: auto;
-  color: var(--light-color)
-}
-
-.report .box-container .box p span:hover {
-  color: black
-}
-
-.tbl {
-	border-collapse: collapse;
-	max-width: 80%;
-	line-height: 2.5rem;
-	margin: 2rem auto 3rem auto;
-	text-align: center;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
-		
-.tbl td, .tbl th {
- 	padding: .5em;
-}
-		
-.tbl tr:nth-child(odd) {
-	background-color: #f2f2f2;
-}
-		
-.tbl tr:hover {
-	background-color: #ddd;
-}
-		
-.tbl th {
-  font-size: 1.5rem;
-	background-color: #444444;
-	color: white;
-	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
-
-.tbl td {
-  font-size: 1.5rem;
-}
-
-.tbl caption {
-  font-size: 3rem;
-  padding-bottom: 2rem;
-}
-
-.add-item {
-  padding-bottom: 2.5rem;
-}
-
-.add-item .box-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.add-item .box-container .box {
-  padding: 2rem;
-  border: 0.1rem solid #aaaaaa;
-  border-radius: 0.25rem;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.add-item .box-container .box div label {
-  font-size: 1.5rem;
-}
-
-.add-item .box-container .box div .inp {
-  border: .1rem solid var(--light-color);
-  border-radius: .2rem;
-  padding: 1rem;
-}
-
-.add-item .box-container .box div button {
-  border: none;
-  border-radius: .2rem;
-  color: white;
-  background-color: var(--blue);
-  font-size: 1.5rem;
-  padding: 1rem;
-}
-
-.add-item .box-container .box div button:hover {
-  scale: 1.05;
-}
-/* Admin dashboard styles*/
-
 .footer .box-container {
   display: flex;
   gap: 1.5rem;
@@ -1260,8 +1129,6 @@ section {
 }
 
 .loading {
-  /* font-family: "Caveat", cursive; */
-  font-family: "Rubik", sans-serif;
   font-weight: 300;
   font-size: 4rem;
   margin: 0;

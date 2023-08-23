@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>my cart</title>
+    <title>My cart</title>
 
     <!-- font awesome cdn link  -->
     <link
@@ -16,6 +16,11 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
+    <div class="loader">
+      <img id="pizza" src="images/pizza-loading.svg" alt="loading screen" />
+      <p class="loading">Loading...</p>
+    </div>
+
     <header class="header">
       <section class="flex">
         <a href="home" class="logo">La Ratatouille</a>
@@ -49,14 +54,11 @@
     <section class="products">
       <h1 class="title">your cart</h1>
       <%if(cart && cart.length===0){%>
-        <div class="box-container">
-          <p>Your cart is empty!</p>
-          <a href="menu" class="btn">view menu</a>
-        </div>
-      <%
-      }
-      else{
-      %>
+      <div class="box-container">
+        <p>Your cart is empty!</p>
+        <a href="menu" class="btn">view menu</a>
+      </div>
+      <% } else{ %>
       <div class="box-container">
         <% let total = 0; if(!cart){ %>
         <div class="box">
@@ -111,13 +113,13 @@
               name="instruction"
               placeholder="add any instruction.."
               class="box"
-          />
-        </div>
-        <div class="cart-total">
-          <p>grand total : <span>BDT</span><%=total%></p>
-          <button type="submit" class="btn">Place order</button>
-        </div>
-      </form>
+            />
+          </div>
+          <div class="cart-total">
+            <p>grand total : <span>BDT</span><%=total%></p>
+            <button type="submit" class="btn">Place order</button>
+          </div>
+        </form>
       </div>
 
       <div class="more-btn">
@@ -164,11 +166,6 @@
 
       <div class="credit">Made with ❤️ by <span>Mitu & Saif</span></div>
     </footer>
-
-    <div class="loader">
-      <img id="pizza" src="images/pizza-loading.svg" alt="loading screen" />
-      <p class="loading">Loading...</p>
-    </div>
 
     <script src="js/loader.js"></script>
     <script src="js/script.js"></script>

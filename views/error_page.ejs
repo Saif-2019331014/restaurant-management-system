@@ -7,15 +7,16 @@
     <title>404</title>
     <link
       rel="stylesheet"
-      href="https://unpkg.com/swiper@8/swiper-bundle.min.css"
-    />
-    <link
-      rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
+    <div class="loader">
+      <img id="pizza" src="images/pizza-loading.svg" alt="loading screen" />
+      <p class="loading">Loading...</p>
+    </div>
+
     <header class="header">
       <section class="flex">
         <a href="home" class="logo">La Ratatouille</a>
@@ -46,25 +47,8 @@
       <p>Page not found ☹️</p>
     </section>
 
-    <div class="loader">
-      <img id="pizza" src="images/pizza-loading.svg" alt="loading screen" />
-      <p class="loading">Loading...</p>
-    </div>
-
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <script src="js/loader.js"></script>
     <script src="js/script.js"></script>
-
-    <!-- <script>
-      var swiper = new Swiper(".home-slider", {
-        loop: true,
-        grabCursor: true,
-        effect: "flip",
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-      });
-    </script> -->
   </body>
 </html>

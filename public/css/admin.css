@@ -1,0 +1,99 @@
+.report h3.title {
+  margin-top: 9.7rem;
+}
+
+.small-title {
+  font-size: 3rem;
+  text-decoration: none;
+  margin-top: 1rem;
+  margin-bottom: 0;
+  font-weight: 400;
+}
+
+.report .box-container {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.report .box-container .box {
+  padding: 2rem;
+  min-width: 20rem;
+  border: 0.2rem solid #f1f1f1;
+  border-radius: 0.25rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.report .box-container .box p {
+  font-size: 2rem;
+  display: flex;
+}
+
+.report .box-container .box p span {
+  font-size: 4rem;
+  margin-left: auto;
+  color: var(--light-color);
+}
+
+.report .box-container .box p span:hover {
+  color: black;
+}
+
+.tbl {
+  border-collapse: collapse;
+  max-width: 80%;
+  line-height: 2.5rem;
+  margin: 2rem auto 3rem auto;
+  text-align: center;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.tbl td,
+.tbl th {
+  padding: 0.5em;
+}
+
+.tbl tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+.tbl tr:hover {
+  background-color: #ddd;
+}
+
+.tbl th {
+  font-size: 1.5rem;
+  background-color: var(--blue);
+  color: white;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.tbl td {
+  font-size: 1.5rem;
+}
+
+.tbl caption {
+  font-size: 3rem;
+  padding-bottom: 2rem;
+}
+
+.form-container form .safety .cal {
+  border: none;
+  border-left: 0.2rem solid #f1f1f1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0;
+}
+
+.form-container form .safety .qty {
+  padding: 1rem;
+  font-size: 1.8rem;
+  border: 0.1rem solid #f1f1f1;
+  border-radius: 0.25rem;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+  width: 10rem;
+}
