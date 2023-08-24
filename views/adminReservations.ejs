@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reservations</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/admin.css" />
+  </head>
+  <body>
+    <div class="loader">
+      <img id="pizza" src="images/pizza-loading.svg" alt="loading screen" />
+      <p class="loading">Loading...</p>
+    </div>
+
+    <header class="header">
+      <section class="flex">
+        <a href="#" class="logo">La Ratatouille</a>
+        <div class="right">
+          <nav class="navbar">
+            <a href="/adminDashboard">Dashboard</a>
+            <a href="/adminDineInOrders">Dine In Orders</a>
+            <a href="/adminOnlineOrders">Online Orders</a>
+            <a href="#" id="actv">Reservations</a>
+            <a href="/adminAddItem">Add Item</a>
+            <a href="/adminModifyItem">Modify Item</a>
+            <a href="/logout">Logout</a>
+          </nav>
+          <div class="icons">
+            <div id="menu-btn" class="fas fa-bars"></div>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <div class="report">
+      <h3 class="title">Reservation History</h3>
+    </div>
+    
+        <table class="tbl" style="margin-bottom: 5rem">
+            <%if(data.length > 0){data.forEach(function(data){%>
+          <tr>
+            <th>Reservation ID</th>
+            <th>Table ID</th>
+            <th>Customer ID</th>
+            <th>No of Guests</th>
+            <th>Arrival Time</th>
+          </tr>
+    
+          <tr>
+            <td><%=data.id%></td>
+            <td><%=data.table_id%></td>
+            <td><%=data.customer_id%></td>
+            <td><%=data.guests%></td>
+            <td><%=data.time%></td>
+        </tr>         
+        <%});} else{%>
+          <tr><td>No reservations yet!</td></tr>
+        <%}%> 
+      </table>
+    
+
+    <script src="js/loader.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

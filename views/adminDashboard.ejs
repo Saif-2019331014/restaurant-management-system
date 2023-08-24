@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin dashboard</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/admin.css" />
+  </head>
+  <body>
+    <div class="loader">
+      <img id="pizza" src="images/pizza-loading.svg" alt="loading screen" />
+      <p class="loading">Loading...</p>
+    </div>
+
+    <header class="header">
+      <section class="flex">
+        <a href="#" class="logo">La Ratatouille</a>
+        <div class="right">
+          <nav class="navbar">
+            <a href="#" id="actv">Dashboard</a>
+            <a href="/adminDineInOrders">Dine In Orders</a>
+            <a href="/adminOnlineOrders">Online Orders</a>
+            <a href="/adminReservations">Reservations</a>
+            <a href="/adminAddItem">Add Item</a>
+            <a href="/adminModifyItem">Modify Item</a>
+            <a href="/logout" class="links">Logout</a>
+          </nav>
+          <div class="icons">
+            <div id="menu-btn" class="fas fa-bars"></div>
+          </div>
+        </div>
+      </section>
+    </header>
+    <div class="report">
+      <h3 class="title">Admin Dashboard</h3>
+      <h4 class="title small-title">Today's order info</h4>
+      <section class="box-container">
+        <div class="box">
+          <p>Total orders</p>
+          <p><span><%=info.processingOrders+info.servedOrders+info.deliveredOrders+info.paidOrders%></span></p>
+        </div>
+
+        <div class="box">
+          <p>Processing orders</p>
+          <p><span><%=info.processingOrders%></span></p>
+        </div>
+
+        <div class="box">
+          <p>Served orders</p>
+          <p><span><%=info.servedOrders%></span></p>
+        </div>
+
+        <div class="box">
+          <p>Completed orders</p>
+          <p><span><%=info.deliveredOrders+info.paidOrders%></span></p>
+        </div>
+
+        <div class="box">
+          <p>Total income</p>
+          <p><span><%=info.total%></span></p>
+        </div>
+      </section>
+    </div>
+
+
+    <div class="report">
+      <h3 class="title">Reservations</h3>
+    </div>
+   
+        <table class="tbl" style="margin-bottom: 5rem">
+          <%if(data1.length > 0){data1.forEach(function(data){%>
+          <tr>
+            <th>Reservation ID</th>
+            <th>Table ID</th>
+            <th>Customer ID</th>
+            <th>No of Guests</th>
+            <th>Arrival Time</th>
+          </tr>
+    
+          <tr>
+            <td><%=data.id%></td>
+            <td><%=data.table_id%></td>
+            <td><%=data.customer_id%></td>
+            <td><%=data.guests%></td>
+            <td><%=data.time%></td>
+          </tr>         
+          <%});} else{%>
+            <tr><td>No reservations yet!</td></tr>
+          <%}%> 
+        </table>
+
+      <div class="report">
+        <h3 class="title">Recent Dine In Orders</h3>
+      </div>
+      
+          <table class="tbl" style="margin-bottom: 5rem">
+            <%if(data2.length > 0){data2.forEach(function(data){%>
+            <tr>
+              <th>Order ID</th>
+              <th>Table ID</th>
+              <th>Staff ID</th>
+              <th>Description</th>
+              <th>Price Breakdown</th>
+              <th>Total</th>
+              <th>Created At</th>
+              <th>Instruction</th>
+              <th>Status</th>
+            </tr>
+      
+            <tr>
+              <td><%=data.id%></td>
+              <td><%=data.table_id%></td>
+              <td><%=data.staff_id%></td>
+              <td><%=data.description%></td>
+              <td><%=data.price_breakdown%></td>
+              <td><%=data.total%></td>
+              <td><%=data.createdAt%></td>
+              <td><%=data.instruction%></td>
+              <%if(data.status==='Paid'){%><td style="color: var(--green)">Paid</td><%}
+              else if(data.status==='Served'){%><td style="color: var(--dark-blue)">Served</td><%}
+              else {%><td style="color: var(--yellow)">Processing</td><%}%>
+            </tr>         
+            <%});} else{%>
+              <tr><td>No orders yet!</td></tr>
+            <%}%> 
+          </table>
+
+        <div class="report">
+          <h3 class="title">Online Orders</h3>
+        </div>
+        
+            <table class="tbl" style="margin-bottom: 5rem">
+              <%if(data3.length > 0){data3.forEach(function(data){%>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer ID</th>
+                <th>Address</th>
+                <th>Description</th>
+                <th>Price Breakdown</th>
+                <th>Total</th>
+                <th>Created At</th>
+                <th>Instruction</th>
+                <th>Status</th>
+              </tr>
+        
+              <tr>
+                <td><%=data.id%></td>
+                <td><%=data.customer_id%></td>
+                <td><%=data.address%></td>
+                <td><%=data.description%></td>
+                <td><%=data.price_breakdown%></td>
+                <td><%=data.total%></td>
+                <td><%=data.createdAt%></td>
+                <td><%=data.instruction%></td>
+                <%if(data.status==='Processing'){%>
+                <td>
+                  <form action="/changeStatus" method="post">
+                    <input type="hidden" name="id" value="<%=data.id%>" />
+                    <select name="sel" class="sel" onchange="this.form.submit()">
+                        <option value="Processing">Processing</option>
+                        <option value="Delivered">Delivered</option>
+                    </select>
+                  </form>
+                </td>
+                <%}else{%>
+                  <td style="color: var(--green)">Delivered</td>
+                <%}%>
+              </tr>         
+        <%});} else{%>
+          <tr><td>No orders yet!</td></tr>
+        <%}%> 
+      </table>
+
+    <script src="js/loader.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

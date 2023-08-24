@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>my orders</title>
+    <title>Make a reservation</title>
 
     <!-- font awesome cdn link  -->
     <link
@@ -46,36 +46,30 @@
       </section>
     </header>
 
-    <div class="heading">
-      <h3>your orders</h3>
-      <p><a href="home">home </a> <span> / orders</span></p>
-    </div>
-
-    <section class="orders">
-      <h1 class="title">placed orders</h1>
-
-      <div class="box-container">
-        <%
-        if(data.length > 0)
-        {
-          data.forEach(function(data){
-        %>
-        <div class="box">
-          <p>placed on : <span><%= data.createdAt %></span></p>
-          <p>name : <span><%= user.firstname %> <%= user.lastname %></span></p>
-          <p>number : <span><%= user.phone %></span></p>
-          <p>email : <span><%= user.email %></span></p>
-          <p>address : <span><%= user.address %></span></p>
-          <p>description : <span><%= data.description %></span></p>
-          <p>price breakdown : <span><%= data.price_breakdown %></span></p>
-          <p>instruction : <span><%= data.instruction %></span></p>
+    <section class="form-container">
+      <form action="/makeReservation" method="post">
+        <div class="safety">
+          <h3>Make a reservation</h3>
+          <input
+            type="numner"
+            min="0"
+            max="50"
+            onkeypress="if(this.value.length == 2) return false;"
+            placeholder="No of guests"
+            required
+            class="box"
+            name="guests"
+          />
+          <input 
+            type="datetime-local" 
+            name="time"
+            class="box"
+            required
+            placeholder="Arrival time"
+          />
+          <input type="submit" value="Find a table" class="btn" name="submit" />
         </div>
-        <%
-          });
-        }
-        %>
-      </div>
-
+      </form>
     </section>
 
     <footer class="footer">

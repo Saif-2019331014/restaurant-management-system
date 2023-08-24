@@ -23,11 +23,13 @@
         <a href="#" class="logo">La Ratatouille</a>
         <div class="right">
           <nav class="navbar">
-            <a href="/admin_dashboard" class="links">Dashboard</a>
-            <a href="/admin_order_history" class="links">Order history</a>
-            <a href="#" class="links" id="actv">Add item</a>
-            <a href="/admin_modify_item" class="links">Modify item</a>
-            <a href="admin_stuff_login" class="links">Logout</a>
+            <a href="/adminDashboard" class="links">Dashboard</a>
+            <a href="/adminDineInOrders">Dine In Orders</a>
+            <a href="/adminOnlineOrders">Online Orders</a>
+            <a href="/adminReservations">Reservations</a>
+            <a href="#" class="links" id="actv">Add Item</a>
+            <a href="/adminModifyItem" class="links">Modify Item</a>
+            <a href="/logout" class="links">Logout</a>
           </nav>
           <div class="icons">
             <div id="menu-btn" class="fas fa-bars"></div>
@@ -37,15 +39,23 @@
     </header>
 
     <section class="form-container">
-      <form action="" method="post">
+      <form action="/adminAddItem" method="post">
         <div class="safety">
           <h3>Add Item</h3>
           <input
             type="text"
             required
             maxlength="100"
-            name="name"
+            name="title"
             placeholder="Item name"
+            class="box"
+          />
+          <input
+            type="text"
+            required
+            maxlength="1000"
+            name="content"
+            placeholder="Description of item"
             class="box"
           />
           <input
@@ -71,6 +81,22 @@
               name="price"
               class="qty"
               onkeypress="if(this.value.length == 5) return false;"
+            />
+          </div>
+          <div class="box cal">
+            <label
+              for="discount"
+              style="color: var(--light-color); padding-right: 1rem"
+              >Discount(%):
+            </label>
+            <input
+              type="number"
+              min="0"
+              max="99"
+              value="0"
+              name="discount"
+              class="qty"
+              onkeypress="if(this.value.length == 2) return false;"
             />
           </div>
           <div class="box cal">
