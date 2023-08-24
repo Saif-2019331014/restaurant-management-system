@@ -38,8 +38,8 @@
           <div class="profile">
             <p class="name"><%=user.firstname %></p>
             <div class="flex">
-              <a href="profile" class="btn">profile</a>
-              <a href="logout" class="delete-btn">logout</a>
+              <a href="profile" class="btn"><span>profile </span></a>
+              <a href="logout" class="btn delete-btn"><span>logout </span></a>
             </div>
           </div>
         </div>
@@ -72,7 +72,7 @@
             <span class="name">grand total :</span>
             <span class="price">$9</span>
           </p>
-          <a href="cart" class="btn">view cart</a>
+          <a href="cart" class="btn"><span>view cart </span></a>
         </div>
         <div class="user-info">
           <h3>your info</h3>
@@ -81,7 +81,7 @@
           <p>
             <i class="fas fa-envelope"></i> <span>shaikhanas@gmail.com</span>
           </p>
-          <a href="update_profile" class="btn">update info</a>
+          <a href="update_profile" class="btn"><span>update info </span></a>
           <h3>delivery address</h3>
           <p class="address">
             <i class="fas fa-map-marker-alt"></i>
@@ -90,7 +90,7 @@
               400104</span
             >
           </p>
-          <a href="update_address" class="btn">update address</a>
+          <a href="update_address" class="btn"><span>update address </span></a>
           <select name="method" class="box" required>
             <option value="" disabled selected>select payment method</option>
             <option value="cash on delivery">cash on delivery</option>
@@ -99,12 +99,13 @@
             <option value="paypal">paypal</option>
           </select>
         </div>
-        <input
+        <!-- <input
           type="submit"
           value="place order"
           name="order"
           class="btn order-btn"
-        />
+        /> -->
+        <button type="submit" name="order" class="btn order-btn"><span>place order </span></button>
       </form>
     </section>
 

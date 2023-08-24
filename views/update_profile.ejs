@@ -38,8 +38,8 @@
           <div class="profile">
             <p class="name"><%=user.firstname %></p>
             <div class="flex">
-              <a href="profile" class="btn">profile</a>
-              <a href="logout" class="delete-btn">logout</a>
+              <a href="profile" class="btn"><span>profile </span></a>
+              <a href="logout" class="btn delete-btn"><span>logout </span></a>
             </div>
           </div>
         </div>
@@ -105,7 +105,7 @@
             class="box"
             oninput="this.value = this.value.replace(/\s/g, '')"
           />
-          <input type="submit" value="update now" class="btn" name="submit" />
+          <button type="submit" name="submit" class="btn"><span>update now </span></button>
         </div>
       </form>
     </section>

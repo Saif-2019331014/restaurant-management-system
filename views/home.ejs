@@ -39,14 +39,14 @@
             <% if(!user){ %>
             <p class="name">Please login or register</p>
             <div class="flex">
-              <a href="login" class="btn">login</a>
-              <a href="register" class="delete-btn">register</a>
+              <a href="login" class="btn"><span>login </span></a>
+              <a href="register" class="btn delete-btn"><span>register </span></a>
             </div>
             <% } else { %>
             <p class="name"><%=user.firstname %></p>
             <div class="flex">
-              <a href="profile" class="btn">profile</a>
-              <a href="logout" class="delete-btn">logout</a>
+              <a href="profile" class="btn"><span>profile </span></a>
+              <a href="logout" class="btn delete-btn"><span>logout </span></a>
             </div>
             <% } %>
           </div>
@@ -284,7 +284,7 @@
       </div> -->
 
       <div class="more-btn">
-        <a href="menu" class="btn">view all</a>
+        <a href="menu" class="btn"><span>view all </span></a>
       </div>
     </section>
 

@@ -39,7 +39,7 @@
     </header>
 
     <section class="form-container">
-      <form action="/adminAddItem" method="post">
+      <form action="/adminAddItem" method="post" enctype="multipart/form-data">
         <div class="safety">
           <h3>Add Item</h3>
           <input
@@ -107,8 +107,7 @@
             </label>
             <input type="file" name="image" style="font-size: 1.5rem" />
           </div>
-          <button type="submit" class="btn">Add Item</button>
-          <!-- <input type="submit" value="login now" class="btn" name="submit" /> -->
+          <button type="submit" class="btn"><span>Add Item </span></button>
         </div>
       </form>
     </section>
