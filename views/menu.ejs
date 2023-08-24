@@ -97,16 +97,15 @@
 
     <div class="heading">
       <h3>our menu</h3>
-      <p><a href="">home </a> <span> / menu</span></p>
+      <!-- <p><a href="">home </a> <span> / menu</span></p> -->
     </div>
     <section class="products">
-      <h1 class="title">latest dishes</h1>
+      <h1 class="title">Menu</h1>
 
       <div class="box-container">
         <% if(data.length > 0) { data.forEach(function(data){ %>
 
         <form action="/addToCart" method="post" class="box">
-          <!-- <a href="quick_view.html" class="fas fa-eye"></a> -->
           <button
             class="fas fa-shopping-cart"
             type="submit"
@@ -135,6 +134,8 @@
         <% }); } %>
       </div>
     </section>
+
+    
 
     <footer class="footer">
       <section class="box-container">
