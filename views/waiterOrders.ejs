@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Online Orders</title>
+    <title>Orders</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     />
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/admin.css" />
+    <link rel="stylesheet" href="css/admin.css" /> 
   </head>
   <body>
     <div class="loader">
@@ -23,12 +23,8 @@
         <a href="#" class="logo">La Ratatouille</a>
         <div class="right">
           <nav class="navbar">
-            <a href="/adminDashboard">Dashboard</a>
-            <a href="/adminDineInOrders">Dine In Orders</a>
-            <a href="#" id="actv">Online Orders</a>
-            <a href="/adminReservations">Reservations</a>
-            <a href="/adminAddItem">Add Item</a>
-            <a href="/adminModifyItem">Modify Item</a>
+            <a href="/kichuektanam">Prepare a order</a>
+            <a href="#" id="actv">Orders</a>
             <a href="/logout">Logout</a>
           </nav>
           <div class="icons">
@@ -39,15 +35,14 @@
     </header>
 
     <div class="report">
-      <h3 class="title">Order History</h3>
+      <h3 class="title">My orders</h3>
     </div>
     
         <table class="tbl" style="margin-bottom: 5rem">
-          <%if(data.length > 0){%>
+            <%if(data.length > 0){%>
           <tr>
             <th>Order ID</th>
-            <th>Customer ID</th>
-            <th>Address</th>
+            <th>Table ID</th>
             <th>Description</th>
             <th>Price Breakdown</th>
             <th>Total</th>
@@ -58,8 +53,7 @@
           <%data.forEach(function(data){%>
           <tr>
             <td><%=data.id%></td>
-            <td><%=data.customer_id%></td>
-            <td><%=data.address%></td>
+            <td><%=data.table_id%></td>
             <td><%=data.description%></td>
             <td><%=data.price_breakdown%></td>
             <td><%=data.total%></td>
@@ -67,22 +61,32 @@
             <td><%=data.instruction%></td>
             <%if(data.status==='Processing'){%>
             <td>
-              <form action="/changeStatus" method="post">
-                <input type="hidden" name="id" value="<%=data.id%>" />
-                <select name="status" class="sel" onchange="this.form.submit()">
-                    <option value="Processing">Processing</option>
-                    <option value="Delivered">Delivered</option>
-                </select>
-              </form>
+                <form action="/changeStatus" method="post">
+                  <input type="hidden" name="id" value="<%=data.id%>" />
+                  <select name="status" class="sel" onchange="this.form.submit()">
+                      <option value="Processing">Processing</option>
+                      <option value="Served">Served</option>
+                  </select>
+                </form>
+            </td>
+            <%}else if(data.status==='Served'){%>
+            <td>
+                <form action="/changeStatus" method="post">
+                    <input type="hidden" name="id" value="<%=data.id%>" />
+                    <select name="status" class="sel" onchange="this.form.submit()">
+                        <option value="Served">Served</option>
+                        <option value="Paid">Paid</option>
+                    </select>
+                </form>
             </td>
             <%}else{%>
-              <td style="color: var(--green)">Delivered</td>
+            <td style="color: var(--green)">Paid</td>
             <%}%>
-          </tr>         
-          <%});} else{%>
-            <tr><td>No orders yet!</td></tr>
-          <%}%> 
-        </table>
+        </tr>         
+        <%});} else{%>
+          <tr><td>No orders yet!</td></tr>
+        <%}%> 
+      </table>
     
 
     <script src="js/loader.js"></script>

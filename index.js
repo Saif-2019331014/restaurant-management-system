@@ -4,7 +4,6 @@ import bodyparser from "body-parser";
 import session from "express-session";
 import bcrypt from "bcryptjs";
 import multer from "multer";
-import path from "path";
 
 // File upload folder
 const DEST_FOLDER = "./public/images/";
@@ -70,7 +69,6 @@ app.set("views", "./views");
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-  // console.log("hello this is backend :)")
   res.redirect("home");
 });
 
@@ -131,7 +129,7 @@ app.post("/staffLogin", (req, res) => {
             console.log(req.session.user.role);
             if (req.session.user.role === "Admin") {
               res.redirect("adminDashboard");
-            } else res.redirect("waiter_orders"); /// not implemented yet
+            } else res.redirect("waiterOrders"); /// not implemented yet
           } else {
             // const errormsg = "Wrong password";
             // res.render("login", { errormsg });
@@ -284,9 +282,28 @@ app.get("/adminDashboard", (req, res) => {
   } else res.json("You do not have access to this page");
 });
 
-// view not implemented yet
+app.post("/changeStatus", (req,res) => {
+  if(req.session.user){
+    let q = ''
+    if(req.session.user.role==='Admin'){
+      q = `UPDATE onlineOrders SET status = '${req.body.status}' where id = ${req.body.id}`
+      db.query(q,(err,data)=>{
+        if(err) return res.json(err)
+        else res.redirect("adminOnlineOrders")
+      })
+    }
+    else{
+      q = `UPDATE dineIns SET status = '${req.body.status}' where id = ${req.body.id}`
+      db.query(q,(err,data)=>{
+        if(err) return res.json(err)
+        else res.redirect("waiterOrders")
+      })
+    }
+  }
+})
+
 app.get("/waiterOrders", (req, res) => {
-  if ((req.session.user && req.session.user, role === "Waiter")) {
+  if ((req.session.user && req.session.user.role === "Waiter")) {
     const date =
       new Date().getMonth() +
       1 +
@@ -294,7 +311,7 @@ app.get("/waiterOrders", (req, res) => {
       new Date().getDate() +
       "/" +
       new Date().getFullYear();
-    const q = `SELECT * FROM orders where staff_id = ${req.session.user.id} AND createdAt LIKE '${date}%'`;
+    const q = `SELECT * FROM dineIns where staff_id = ${req.session.user.id} AND createdAt LIKE '${date}%'`;
     db.query(q, (err, data) => {
       if (err) res.json(err);
       else res.render("waiterOrders", { user: req.session.user, data: data });
@@ -338,9 +355,46 @@ app.post("/login", (req, res) => {
   });
 });
 
+
+
 app.get("/menu", (req, res) => {
-  console.log(req.session.user);
-  console.log(req.session.cart);
+
+  // const query1 = "SELECT DISTINCT type FROM menu";
+
+  // db.query(query1, (err, category) => {
+  //   if (err) return res.json(err);
+  //   else {
+  //     const menu = [];
+  //     console.log(category)
+  //     for(let i=0;i<category.length;i++){
+  //       const query2 = `SELECT * FROM menu WHERE type = '${category[i].type}'`;
+  //       console.log(query2)
+  //       db.query(query2, (err,data)=>{
+  //         if(err) return res.json(err);
+  //         else {
+  //           for(let j=0;j<data.length;j++){
+  //             console.log(data[j])
+  //             menu.push({
+  //               title : data[j].title,
+  //               content : data[j].content,
+  //               price : data[j].price,
+  //               discount : data[j].price
+  //             })
+  //             console.log(menu.length)
+  //           }
+            
+  //           res.render("menu", {
+  //             user: req.session.user,
+  //             category: category,
+  //             menu: menu
+  //           });
+  //         }
+  //       })
+  //     }
+  //   }
+  // });
+
+  
   const query = "SELECT * FROM menu";
 
   db.query(query, (err, data) => {
@@ -496,7 +550,7 @@ app.post("/checkout", (req, res) => {
       total,
       new Date().toLocaleString(),
       req.body.instruction,
-      "Paid",
+      "Processing",
     ];
 
     db.query(q3, [values], (err, data) => {

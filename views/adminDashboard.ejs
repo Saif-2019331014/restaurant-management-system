@@ -74,7 +74,7 @@
     </div>
    
         <table class="tbl" style="margin-bottom: 5rem">
-          <%if(data1.length > 0){data1.forEach(function(data){%>
+          <%if(data1.length > 0){%>
           <tr>
             <th>Reservation ID</th>
             <th>Table ID</th>
@@ -82,7 +82,7 @@
             <th>No of Guests</th>
             <th>Arrival Time</th>
           </tr>
-    
+          <%data1.forEach(function(data){%>
           <tr>
             <td><%=data.id%></td>
             <td><%=data.table_id%></td>
@@ -100,7 +100,7 @@
       </div>
       
           <table class="tbl" style="margin-bottom: 5rem">
-            <%if(data2.length > 0){data2.forEach(function(data){%>
+            <%if(data2.length > 0){%>
             <tr>
               <th>Order ID</th>
               <th>Table ID</th>
@@ -112,7 +112,7 @@
               <th>Instruction</th>
               <th>Status</th>
             </tr>
-      
+            <%data2.forEach(function(data){%>
             <tr>
               <td><%=data.id%></td>
               <td><%=data.table_id%></td>
@@ -132,11 +132,11 @@
           </table>
 
         <div class="report">
-          <h3 class="title">Online Orders</h3>
+          <h3 class="title">Recent Online Orders</h3>
         </div>
         
             <table class="tbl" style="margin-bottom: 5rem">
-              <%if(data3.length > 0){data3.forEach(function(data){%>
+              <%if(data3.length > 0){%>
               <tr>
                 <th>Order ID</th>
                 <th>Customer ID</th>
@@ -148,7 +148,7 @@
                 <th>Instruction</th>
                 <th>Status</th>
               </tr>
-        
+              <%data3.forEach(function(data){%>
               <tr>
                 <td><%=data.id%></td>
                 <td><%=data.customer_id%></td>
@@ -162,7 +162,7 @@
                 <td>
                   <form action="/changeStatus" method="post">
                     <input type="hidden" name="id" value="<%=data.id%>" />
-                    <select name="sel" class="sel" onchange="this.form.submit()">
+                    <select name="status" class="sel" onchange="this.form.submit()">
                         <option value="Processing">Processing</option>
                         <option value="Delivered">Delivered</option>
                     </select>

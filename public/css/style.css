@@ -1236,3 +1236,59 @@ section {
     font-size: 2rem;
   }
 }
+
+
+/* experimenting */
+
+.containerr {
+  width: 100%;
+  max-width: 1200px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.tm-paging-links {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.tm-paging-item {
+  list-style: none;
+  display: inline-block;
+  border: 1px solid #2F956D;
+  margin: 7px;
+}
+
+.tm-paging-link {
+  padding: 10px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #2F956D;
+  background-color: transparent;
+}
+
+.tm-paging-link.active,
+.tm-paging-link:hover {
+  background-color: #2F956D;
+  color: white;
+}
+
+.tm-gallery-title {
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: #1A6692;
+  margin-bottom: 15px;
+}
+
+.tm-gallery-description {
+  margin-bottom: 20px;
+}
+
+.tm-gallery-price {
+  font-size: 1.25rem;
+  color: #2F956D;
+  margin-bottom: 60px;
+}
+/* kete dio chaile */

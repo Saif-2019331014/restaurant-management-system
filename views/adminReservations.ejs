@@ -43,7 +43,7 @@
     </div>
     
         <table class="tbl" style="margin-bottom: 5rem">
-            <%if(data.length > 0){data.forEach(function(data){%>
+            <%if(data.length > 0){%>
           <tr>
             <th>Reservation ID</th>
             <th>Table ID</th>
@@ -51,7 +51,7 @@
             <th>No of Guests</th>
             <th>Arrival Time</th>
           </tr>
-    
+          <%data.forEach(function(data){%>
           <tr>
             <td><%=data.id%></td>
             <td><%=data.table_id%></td>

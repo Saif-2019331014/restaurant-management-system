@@ -43,7 +43,7 @@
     </div>
     
         <table class="tbl" style="margin-bottom: 5rem">
-            <%if(data.length > 0){data.forEach(function(data){%>
+            <%if(data.length > 0){%>
           <tr>
             <th>Order ID</th>
             <th>Table ID</th>
@@ -55,7 +55,7 @@
             <th>Instruction</th>
             <th>Status</th>
           </tr>
-    
+          <%data.forEach(function(data){%>
           <tr>
             <td><%=data.id%></td>
             <td><%=data.table_id%></td>
