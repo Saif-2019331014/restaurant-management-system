@@ -41,7 +41,7 @@
     <section class="form-container">
       <form action="/adminAddItem" method="post" enctype="multipart/form-data">
         <div class="safety">
-          <h3>Add Item</h3>
+          <h3>Modify Item</h3>
           <input
             type="text"
             required
@@ -49,6 +49,7 @@
             name="title"
             placeholder="Item name"
             class="box"
+            value="<%=title%>"
           />
           <input
             type="text"
@@ -57,6 +58,7 @@
             name="content"
             placeholder="Description of item"
             class="box"
+            value="<%=content%>"
           />
           <input
             type="text"
@@ -65,6 +67,7 @@
             name="type"
             placeholder="Item type"
             class="box"
+            value="<%=type%>"
           />
           <div class="box cal">
             <label
@@ -77,7 +80,7 @@
               required
               min="1"
               max="10000"
-              value="100"
+              value="<%=price%>"
               name="price"
               class="qty"
               onkeypress="if(this.value.length == 5) return false;"

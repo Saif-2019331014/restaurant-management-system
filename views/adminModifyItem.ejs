@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add menu item</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/admin.css" />
+    <link rel="stylesheet" href="css/modify.css" />
+  </head>
+  <body>
+    <div class="loader">
+      <img id="pizza" src="images/pizza-loading.svg" alt="loading screen" />
+      <p class="loading">Loading...</p>
+    </div>
+
+    <header class="header">
+      <section class="flex">
+        <a href="#" class="logo">La Ratatouille</a>
+        <div class="right">
+          <nav class="navbar">
+            <a href="/adminDashboard" class="links">Dashboard</a>
+            <a href="/adminDineInOrders">Dine In Orders</a>
+            <a href="/adminOnlineOrders">Online Orders</a>
+            <a href="/adminReservations">Reservations</a>
+            <a href="/adminAddItem" class="links">Add Item</a>
+            <a href="#" class="links" id="actv">Modify Item</a>
+            <a href="/logout" class="links">Logout</a>
+          </nav>
+          <div class="icons">
+            <div id="menu-btn" class="fas fa-bars"></div>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <h1 class="title">Menu Items</h1>
+
+    <div class="jar">
+      <% if(data.length > 0) { data.forEach(function(data){ const img =
+      "/images/" + data.title + ".jpg"%>
+      <div class="compact">
+        <img src="<%=img%>" alt="" />
+        <div class="info">
+          <h3 class="modname"><%= data.title %></h3>
+          <p class="modtype"><%= data.type %></p>
+          <p class="modprice">BDT <span><%= data.price %></span>/-</p>
+        </div>
+        <div>
+          <form action="/modify" method="post">
+            <input type="hidden" name="title" value="<%= data.title %>">
+            <input type="hidden" name="content" value="<%= data.content %>">
+            <input type="hidden" name="type" value="<%= data.type %>">
+            <input type="hidden" name="price" value="<%= data.price %>">
+            <button class="btn change"><span>Modify Item </span></button>
+          </form>
+        </div>
+      </div>
+      <% }); } %>
+    </div>
+
+    <script src="js/loader.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

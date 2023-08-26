@@ -1,0 +1,46 @@
+.jar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 5rem;
+}
+.jar .compact {
+  border: 0.2rem solid #f1f1f1;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin: 1rem auto;
+  width: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.jar .compact img {
+  width: 10rem;
+  height: 10rem;
+  object-fit: cover;
+}
+
+.jar .compact .info {
+  margin-right: auto;
+  padding-left: 2rem;
+}
+
+.jar .compact .info .modname {
+  font-size: 2rem;
+}
+
+.jar .compact .info .modtype {
+  font-size: 1.5rem;
+  padding: .5rem 0;
+}
+
+.jar .compact .info .modprice {
+  font-size: 1.75rem;
+}
+
+.jar .compact .change {
+    font-size: 1.75rem;
+    padding: 1rem 1.5rem;
+}

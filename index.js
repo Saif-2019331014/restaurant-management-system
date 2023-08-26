@@ -96,7 +96,7 @@ app.get("/home", (req, res) => {
 });
 
 app.get("/staffLogin", (req, res) => {
-  const errormsg = '';
+  const errormsg = "";
   if (req.session.user) {
     if (req.session.user.role === "Admin") {
       res.redirect("adminDashboard");
@@ -150,6 +150,31 @@ app.get("/adminAddItem", (req, res) => {
     // res.json('You do not have access to this page')
   }
 });
+
+/* ekhane change korsi. thik ache kina ektu check kore dekhio */
+
+app.get("/adminModifyItem", (req, res) => {
+  const query = "SELECT * FROM menu";
+
+  db.query(query, (err, data) => {
+    if (err) return res.json(err);
+    else {
+      res.render("adminModifyItem", { user: req.session.user, data: data });
+    }
+  });
+});
+
+app.post("/modify", (req, res) => {
+  console.log(req.body);
+  const data = req.body;
+  res.render("modify", req.body);
+});
+
+// app.get("/modify", (req, res) => {
+//   res.render("modify", {});
+// });
+
+/* ekhane porjonto change korsi */
 
 app.post("/adminAddItem", upload.single("image"), (req, res) => {
   const q = "INSERT INTO menu (title, content, type, price) VALUES (?)";
@@ -283,28 +308,27 @@ app.get("/adminDashboard", (req, res) => {
   } else res.json("You do not have access to this page");
 });
 
-app.post("/changeStatus", (req,res) => {
-  if(req.session.user){
-    let q = ''
-    if(req.session.user.role==='Admin'){
-      q = `UPDATE onlineOrders SET status = '${req.body.status}' where id = ${req.body.id}`
-      db.query(q,(err,data)=>{
-        if(err) return res.json(err)
-        else res.redirect("adminOnlineOrders")
-      })
-    }
-    else{
-      q = `UPDATE dineIns SET status = '${req.body.status}' where id = ${req.body.id}`
-      db.query(q,(err,data)=>{
-        if(err) return res.json(err)
-        else res.redirect("waiterOrders")
-      })
+app.post("/changeStatus", (req, res) => {
+  if (req.session.user) {
+    let q = "";
+    if (req.session.user.role === "Admin") {
+      q = `UPDATE onlineOrders SET status = '${req.body.status}' where id = ${req.body.id}`;
+      db.query(q, (err, data) => {
+        if (err) return res.json(err);
+        else res.redirect("adminOnlineOrders");
+      });
+    } else {
+      q = `UPDATE dineIns SET status = '${req.body.status}' where id = ${req.body.id}`;
+      db.query(q, (err, data) => {
+        if (err) return res.json(err);
+        else res.redirect("waiterOrders");
+      });
     }
   }
-})
+});
 
 app.get("/waiterOrders", (req, res) => {
-  if ((req.session.user && req.session.user.role === "Waiter")) {
+  if (req.session.user && req.session.user.role === "Waiter") {
     const date =
       new Date().getMonth() +
       1 +
@@ -321,7 +345,7 @@ app.get("/waiterOrders", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-  const errormsg = '';
+  const errormsg = "";
   if (!req.session.user) {
     res.render("login", { user: req.session.user, errormsg });
   } else res.redirect("home");
@@ -357,10 +381,7 @@ app.post("/login", (req, res) => {
   });
 });
 
-
-
 app.get("/menu", (req, res) => {
-
   // const query1 = "SELECT DISTINCT type FROM menu";
 
   // db.query(query1, (err, category) => {
@@ -384,7 +405,7 @@ app.get("/menu", (req, res) => {
   //             })
   //             console.log(menu.length)
   //           }
-            
+
   //           res.render("menu", {
   //             user: req.session.user,
   //             category: category,
@@ -396,7 +417,6 @@ app.get("/menu", (req, res) => {
   //   }
   // });
 
-  
   const query = "SELECT * FROM menu";
 
   db.query(query, (err, data) => {
