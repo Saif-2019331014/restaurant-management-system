@@ -40,7 +40,9 @@
             <p class="name">Please login or register</p>
             <div class="flex">
               <a href="login" class="btn"><span>login </span></a>
-              <a href="register" class="btn delete-btn"><span>register </span></a>
+              <a href="register" class="btn delete-btn"
+                ><span>register </span></a
+              >
             </div>
             <% } else { %>
             <p class="name"><%=user.firstname %></p>
@@ -340,6 +342,9 @@
           },
           1024: {
             slidesPerView: 3,
+          },
+          1280: {
+            slidesPerView: 4,
           },
         },
       });

@@ -14,12 +14,13 @@
 
     <!-- custom css file link  -->
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/filter.css" />
   </head>
   <body>
-    <div class="loader">
+    <!-- <div class="loader">
       <img id="pizza" src="images/pizza-loading.svg" alt="loading screen" />
       <p class="loading">Loading...</p>
-    </div>
+    </div> -->
 
     <header class="header">
       <section class="flex">
@@ -40,7 +41,9 @@
             <p class="name">Please login or register</p>
             <div class="flex">
               <a href="login" class="btn"><span>login </span></a>
-              <a href="register" class="btn delete-btn"><span>register </span></a>
+              <a href="register" class="btn delete-btn"
+                ><span>register </span></a
+              >
             </div>
             <% } else { %>
             <p class="name"><%=user.firstname %></p>
@@ -54,19 +57,26 @@
       </section>
     </header>
 
-    <div class="heading">
-      <h3>our menu</h3>
-      <!-- <p><a href="">home </a> <span> / menu</span></p> -->
-    </div>
-
-
     <section class="products">
-      <h1 class="title">Menu</h1>
+      <h1 class="title">Our Menu</h1>
+      <div class="filter-btns">
+        <button type="button" class="filter-btn" id="All">All</button>
+        <button type="button" class="filter-btn" id="Pizza">Pizza</button>
+        <button type="button" class="filter-btn" id="Pasta">Pasta</button>
+        <button type="button" class="filter-btn" id="Dessert">Dessert</button>
+        <button type="button" class="filter-btn" id="Drinks">Drinks</button>
+        <button type="button" class="filter-btn" id="Salad">Salad</button>
+        <button type="button" class="filter-btn" id="Soup">Soup</button>
+      </div>
 
       <div class="box-container">
         <% if(data.length > 0) { data.forEach(function(data){ 
-        const img = "/images/" + data.title + ".jpg"%>
-        <form action="/addToCart" method="post" class="box">
+          const img = "/images/" + data.title + ".jpg"%>
+        <form
+          action="/addToCart"
+          method="post"
+          class="box filter-item All <%= data.type %>"
+        >
           <button
             class="fas fa-shopping-cart"
             type="submit"
@@ -78,7 +88,7 @@
           <div class="name"><%= data.title %></div>
           <div class="flex">
             <div class="price">
-              <span>BDT</span><%= data.price %><span>/-</span>
+              <span>BDT </span><%= data.price %><span>/-</span>
             </div>
             <input
               type="number"
@@ -91,12 +101,9 @@
             />
           </div>
         </form>
-
         <% }); } %>
       </div>
     </section>
-
-    
 
     <footer class="footer">
       <section class="box-container">
@@ -132,7 +139,8 @@
       <div class="credit">Made with ❤️ by <span>Mitu & Saif</span></div>
     </footer>
 
-    <script src="js/loader.js"></script>
+    <!-- <script src="js/loader.js"></script> -->
     <script src="js/script.js"></script>
+    <script src="js/filter.js"></script>
   </body>
 </html>
