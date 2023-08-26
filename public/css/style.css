@@ -3,7 +3,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap");
 
 :root {
-  --yellow: #ffc107;
   --green: #198754;
   --blue: #1da1f2;
   --dark-blue: #0d6efd;
@@ -156,6 +155,7 @@ section {
   font-size: 4rem;
   color: var(--black);
   text-decoration: underline;
+  text-transform: capitalize;
   text-underline-offset: 1rem;
   padding-top: 4rem;
 }
@@ -180,7 +180,7 @@ section {
 
 .heading p a {
   font-size: 2rem;
-  color: var(--yellow);
+  color: var(--blue);
 }
 
 .heading p span {
@@ -284,7 +284,7 @@ section {
   padding: 1.2rem 3rem;
   cursor: pointer;
   font-size: 2rem;
-  border-radius: 0.2rem;
+  border-radius: 0.25rem;
   border: none;
   color: #ffffff;
   text-align: center;
@@ -337,7 +337,7 @@ section {
 }
 
 .header .flex .profile .account a:hover {
-  color: var(--yellow);
+  color: var(--blue);
 } */
 
 #actv {
@@ -425,6 +425,17 @@ section {
   color: var(--white);
 }
 
+.products .empty {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.products .empty p {
+  font-size: 3rem;
+}
+
 .products .box-container {
   display: flex;
   gap: 2rem;
@@ -495,6 +506,7 @@ section {
 .products .box-container .box .flex {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 1rem;
 }
 
@@ -505,7 +517,7 @@ section {
 
 .products .box-container .box .flex .price span,
 .products .box-container .box .flex .qt {
-  font-size: 1.8rem;
+  font-size: 1.75rem;
   color: var(--light-color);
 }
 
@@ -515,12 +527,22 @@ section {
   border: 0.1rem solid #f1f1f1;
   border-radius: 0.25rem;
   box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
-  width: 7rem;
+  width: 6rem;
+}
+
+.products .box-container .box .flex .qty2 {
+  padding: .6rem;
+  width: 5rem;
+}
+
+.products .box-container .box .flex .op button {
+  background: none;
+  border: none;
 }
 
 .products .box-container .box .flex .fa-edit {
   width: 5rem;
-  background-color: var(--yellow);
+  background-color: var(--blue);
   color: var(--black);
   cursor: pointer;
   height: 4.5rem;
@@ -637,7 +659,7 @@ section {
 
 .products .slide .box .flex .price span,
 .products .slide .box .flex .qt {
-  font-size: 1.8rem;
+  font-size: 1.75rem;
   color: var(--light-color);
 }
 
@@ -647,12 +669,12 @@ section {
   border: 0.1rem solid #f1f1f1;
   border-radius: 0.25rem;
   box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
-  width: 7rem;
+  width: 6rem;
 }
 
 .products .slide .box .flex .fa-edit {
   width: 5rem;
-  background-color: var(--yellow);
+  background-color: var(--blue);
   color: var(--black);
   cursor: pointer;
   height: 4.5rem;
@@ -695,19 +717,31 @@ section {
 }
 
 .products .more-btn {
-  margin-top: 2rem;
+  margin-top: 4rem;
   text-align: center;
 }
 
 .products .cart-total {
-  border: var(--border);
+  border: 0.2rem solid #f1f1f1;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  border-radius: 0.5rem;
   padding: 1rem 2rem;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
+  margin: 4rem auto;
+  /* margin-top: 4rem;
+  margin-bottom: 2rem; */
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
   align-items: center;
+  width: 75%;
+}
+
+.products .cart-total input {
+  width: 100%;
+  border: 0.2rem solid #f1f1f1;
+  border-radius: 0.25rem;
+  height: 6rem;
+  padding: 1rem;
 }
 
 .products .cart-total p {
@@ -784,7 +818,7 @@ section {
 
 .reviews .slide .stars i {
   font-size: 1.7rem;
-  color: var(--yellow);
+  color: var(--blue);
 }
 
 .reviews .slide h3 {
@@ -891,7 +925,7 @@ section {
 }
 
 .search-form form button:hover {
-  background-color: var(--yellow);
+  background-color: var(--blue);
   color: var(--black);
 }
 
@@ -978,6 +1012,17 @@ section {
   color: var(--black);
 }
 
+.form-container form .safety .deny {
+  background-color: rgba(255, 0, 0, 0.5);
+  border-left: 1rem solid rgb(255, 0, 0);
+  border-radius: 0.25rem;
+}
+
+.form-container form .safety .deny p {
+  color: white;
+  padding: 0.5rem 0;
+}
+
 .checkout form {
   max-width: 50rem;
   margin: 0 auto;
@@ -1012,7 +1057,7 @@ section {
 }
 
 .checkout form .cart-items p .price {
-  color: var(--yellow);
+  color: var(--blue);
 }
 
 .checkout form .cart-items .grand-total {

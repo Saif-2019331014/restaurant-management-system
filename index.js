@@ -96,6 +96,7 @@ app.get("/home", (req, res) => {
 });
 
 app.get("/staffLogin", (req, res) => {
+  const errormsg = '';
   if (req.session.user) {
     if (req.session.user.role === "Admin") {
       res.redirect("adminDashboard");
@@ -105,7 +106,7 @@ app.get("/staffLogin", (req, res) => {
       res.redirect("error_page");
       // res.json('You do not have access to this page')
     }
-  } else res.render("staffLogin", { user: req.session.user });
+  } else res.render("staffLogin", { user: req.session.user, errormsg });
 });
 
 app.post("/staffLogin", (req, res) => {
@@ -115,9 +116,9 @@ app.post("/staffLogin", (req, res) => {
 
   db.query(q, (err, data) => {
     if (err || data.length === 0) {
-      // const errormsg = "Wrong email";
-      res.json("Wrong email!");
-      // res.render("login", { errormsg });
+      // res.json("Wrong email!");
+      const errormsg = "Wrong email";
+      res.render("staffLogin", { errormsg });
     } else {
       const actualPassword = data[0].password;
       // generate a hash and checking
@@ -131,9 +132,9 @@ app.post("/staffLogin", (req, res) => {
               res.redirect("adminDashboard");
             } else res.redirect("waiterOrders"); /// not implemented yet
           } else {
-            // const errormsg = "Wrong password";
-            // res.render("login", { errormsg });
-            res.json("Wrong password!");
+            // res.json("Wrong password!");
+            const errormsg = "Wrong password";
+            res.render("staffLogin", { errormsg });
           }
         });
       });
@@ -320,8 +321,9 @@ app.get("/waiterOrders", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
+  const errormsg = '';
   if (!req.session.user) {
-    res.render("login", { user: req.session.user });
+    res.render("login", { user: req.session.user, errormsg });
   } else res.redirect("home");
 });
 
@@ -332,9 +334,9 @@ app.post("/login", (req, res) => {
 
   db.query(q, (err, data) => {
     if (err || data.length === 0) {
-      // const errormsg = "Wrong email";
-      res.json("Wrong email!");
-      // res.render("login", { errormsg });
+      // res.json("Wrong email!");
+      const errormsg = "Wrong email";
+      res.render("login", { errormsg });
     } else {
       const actualPassword = data[0].password;
       // generate a hash and checking
@@ -345,9 +347,9 @@ app.post("/login", (req, res) => {
             req.session.user = data[0];
             res.redirect("home");
           } else {
-            // const errormsg = "Wrong password";
-            // res.render("login", { errormsg });
-            res.json("Wrong password!");
+            // res.json("Wrong password!");
+            const errormsg = "Wrong password";
+            res.render("login", { errormsg });
           }
         });
       });

@@ -43,7 +43,11 @@
       <section class="box-container">
         <div class="box">
           <p>Total orders</p>
-          <p><span><%=info.processingOrders+info.servedOrders+info.deliveredOrders+info.paidOrders%></span></p>
+          <p>
+            <span
+              ><%=info.processingOrders+info.servedOrders+info.deliveredOrders+info.paidOrders%></span
+            >
+          </p>
         </div>
 
         <div class="box">
@@ -68,114 +72,123 @@
       </section>
     </div>
 
-
     <div class="report">
       <h3 class="title">Reservations</h3>
     </div>
-   
-        <table class="tbl" style="margin-bottom: 5rem">
-          <%if(data1.length > 0){%>
-          <tr>
-            <th>Reservation ID</th>
-            <th>Table ID</th>
-            <th>Customer ID</th>
-            <th>No of Guests</th>
-            <th>Arrival Time</th>
-          </tr>
-          <%data1.forEach(function(data){%>
-          <tr>
-            <td><%=data.id%></td>
-            <td><%=data.table_id%></td>
-            <td><%=data.customer_id%></td>
-            <td><%=data.guests%></td>
-            <td><%=data.time%></td>
-          </tr>         
-          <%});} else{%>
-            <tr><td>No reservations yet!</td></tr>
-          <%}%> 
-        </table>
 
-      <div class="report">
-        <h3 class="title">Recent Dine In Orders</h3>
-      </div>
-      
-          <table class="tbl" style="margin-bottom: 5rem">
-            <%if(data2.length > 0){%>
-            <tr>
-              <th>Order ID</th>
-              <th>Table ID</th>
-              <th>Staff ID</th>
-              <th>Description</th>
-              <th>Price Breakdown</th>
-              <th>Total</th>
-              <th>Created At</th>
-              <th>Instruction</th>
-              <th>Status</th>
-            </tr>
-            <%data2.forEach(function(data){%>
-            <tr>
-              <td><%=data.id%></td>
-              <td><%=data.table_id%></td>
-              <td><%=data.staff_id%></td>
-              <td><%=data.description%></td>
-              <td><%=data.price_breakdown%></td>
-              <td><%=data.total%></td>
-              <td><%=data.createdAt%></td>
-              <td><%=data.instruction%></td>
-              <%if(data.status==='Paid'){%><td style="color: var(--green)">Paid</td><%}
-              else if(data.status==='Served'){%><td style="color: var(--dark-blue)">Served</td><%}
-              else {%><td style="color: var(--yellow)">Processing</td><%}%>
-            </tr>         
-            <%});} else{%>
-              <tr><td>No orders yet!</td></tr>
-            <%}%> 
-          </table>
+    <table class="tbl" style="margin-bottom: 5rem">
+      <%if(data1.length > 0){%>
+      <tr>
+        <th>Reservation ID</th>
+        <th>Table ID</th>
+        <th>Customer ID</th>
+        <th>No of Guests</th>
+        <th>Arrival Time</th>
+      </tr>
+      <%data1.forEach(function(data){%>
+      <tr>
+        <td><%=data.id%></td>
+        <td><%=data.table_id%></td>
+        <td><%=data.customer_id%></td>
+        <td><%=data.guests%></td>
+        <td><%=data.time%></td>
+      </tr>
+      <%});} else{%>
+      <tr>
+        <td>No reservations yet!</td>
+      </tr>
+      <%}%>
+    </table>
 
-        <div class="report">
-          <h3 class="title">Recent Online Orders</h3>
-        </div>
-        
-            <table class="tbl" style="margin-bottom: 5rem">
-              <%if(data3.length > 0){%>
-              <tr>
-                <th>Order ID</th>
-                <th>Customer ID</th>
-                <th>Address</th>
-                <th>Description</th>
-                <th>Price Breakdown</th>
-                <th>Total</th>
-                <th>Created At</th>
-                <th>Instruction</th>
-                <th>Status</th>
-              </tr>
-              <%data3.forEach(function(data){%>
-              <tr>
-                <td><%=data.id%></td>
-                <td><%=data.customer_id%></td>
-                <td><%=data.address%></td>
-                <td><%=data.description%></td>
-                <td><%=data.price_breakdown%></td>
-                <td><%=data.total%></td>
-                <td><%=data.createdAt%></td>
-                <td><%=data.instruction%></td>
-                <%if(data.status==='Processing'){%>
-                <td>
-                  <form action="/changeStatus" method="post">
-                    <input type="hidden" name="id" value="<%=data.id%>" />
-                    <select name="status" class="sel" onchange="this.form.submit()">
-                        <option value="Processing">Processing</option>
-                        <option value="Delivered">Delivered</option>
-                    </select>
-                  </form>
-                </td>
-                <%}else{%>
-                  <td style="color: var(--green)">Delivered</td>
-                <%}%>
-              </tr>         
-        <%});} else{%>
-          <tr><td>No orders yet!</td></tr>
-        <%}%> 
-      </table>
+    <div class="report">
+      <h3 class="title">Recent Dine In Orders</h3>
+    </div>
+
+    <table class="tbl" style="margin-bottom: 5rem">
+      <%if(data2.length > 0){%>
+      <tr>
+        <th>Order ID</th>
+        <th>Table ID</th>
+        <th>Staff ID</th>
+        <th>Description</th>
+        <th>Price Breakdown</th>
+        <th>Total</th>
+        <th>Created At</th>
+        <th>Instruction</th>
+        <th>Status</th>
+      </tr>
+      <%data2.forEach(function(data){%>
+      <tr>
+        <td><%=data.id%></td>
+        <td><%=data.table_id%></td>
+        <td><%=data.staff_id%></td>
+        <td><%=data.description%></td>
+        <td><%=data.price_breakdown%></td>
+        <td><%=data.total%></td>
+        <td><%=data.createdAt%></td>
+        <td><%=data.instruction%></td>
+        <%if(data.status==='Paid'){%>
+        <td style="color: var(--green)">Paid</td>
+        <%} else if(data.status==='Served'){%>
+        <td style="color: var(--dark-blue)">Served</td>
+        <%} else {%>
+        <td style="color: var(--blue)">Processing</td>
+        <%}%>
+      </tr>
+      <%});} else{%>
+      <tr>
+        <td>No orders yet!</td>
+      </tr>
+      <%}%>
+    </table>
+
+    <div class="report">
+      <h3 class="title">Recent Online Orders</h3>
+    </div>
+
+    <table class="tbl" style="margin-bottom: 5rem">
+      <%if(data3.length > 0){%>
+      <tr>
+        <th>Order ID</th>
+        <th>Customer ID</th>
+        <th>Address</th>
+        <th>Description</th>
+        <th>Price Breakdown</th>
+        <th>Total</th>
+        <th>Created At</th>
+        <th>Instruction</th>
+        <th>Status</th>
+      </tr>
+      <%data3.forEach(function(data){%>
+      <tr>
+        <td><%=data.id%></td>
+        <td><%=data.customer_id%></td>
+        <td><%=data.address%></td>
+        <td><%=data.description%></td>
+        <td><%=data.price_breakdown%></td>
+        <td><%=data.total%></td>
+        <td><%=data.createdAt%></td>
+        <td><%=data.instruction%></td>
+        <%if(data.status==='Processing'){%>
+        <td>
+          <form action="/changeStatus" method="post">
+            <input type="hidden" name="id" value="<%=data.id%>" />
+            <select name="status" class="sel" onchange="this.form.submit()">
+              <option value="Processing">Processing</option>
+              <option value="Delivered">Delivered</option>
+            </select>
+          </form>
+        </td>
+        <%}else{%>
+        <td style="color: var(--green)">Delivered</td>
+        <%}%>
+      </tr>
+      <%});} else{%>
+      <tr>
+        <td>No orders yet!</td>
+      </tr>
+      <%}%>
+    </table>
 
     <script src="js/loader.js"></script>
     <script src="js/script.js"></script>
