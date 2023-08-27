@@ -319,7 +319,7 @@ section {
 }
 
 .btn {
-  background-color: var(--blue);
+  background-color: var(--black);
 }
 
 .delete-btn {
@@ -969,7 +969,7 @@ section {
 }
 
 .form-container form {
-  max-width: 50rem;
+  max-width: 75rem;
   margin: 0 auto;
   border: 0.2rem solid #f1f1f1;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;

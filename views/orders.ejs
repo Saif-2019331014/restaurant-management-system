@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>my orders</title>
+    <title>My Orders</title>
 
     <!-- font awesome cdn link  -->
     <link
@@ -14,6 +14,7 @@
 
     <!-- custom css file link  -->
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/admin.css" />
   </head>
   <body>
     <div class="loader">
@@ -36,25 +37,60 @@
             <div id="menu-btn" class="fas fa-bars"></div>
           </div>
           <div class="profile">
-            <p class="name"><%=user.firstname %></p>
+            <p class="name"><%= user.firstname %></p>
             <div class="flex">
-              <a href="profile" class="btn"><span>profile </span></a>
-              <a href="logout" class="btn delete-btn"><span>logout </span></a>
+              <a href="profile" class="btn"><span>Profile </span></a>
+              <a href="logout" class="btn delete-btn"><span>Logout </span></a>
             </div>
           </div>
         </div>
       </section>
     </header>
 
-    <div class="heading">
+    <!-- <div class="heading">
       <h3>your orders</h3>
       <p><a href="home">home </a> <span> / orders</span></p>
-    </div>
+    </div> -->
 
     <section class="orders">
-      <h1 class="title">placed orders</h1>
+      <p class="title"><span>Placed Orders</span></p> 
 
-      <div class="box-container">
+
+      <table class="tbl" style="margin-bottom: 5rem; width: 80%;">
+        <%if(data.length > 0){%>
+      <tr>
+        <th>Order ID</th>
+        <th>Created At</th>
+        <th>Customer Info</th>
+        <th>Delivery Info</th>
+        <th>Order Info</th>
+        <th>Payment Info</th>
+        <th>Status</th>
+      </tr>
+      <%data.forEach(function(data){%>
+      <tr>
+        <td><%=data.id%></td>
+        <td><%=data.createdAt%></td>
+        <td>
+          <p><span style="font-weight: bold;">Name: </span><span><%= user.firstname %></span></p>
+          <p><span style="font-weight: bold;">Phone: </span><span><%= user.phone %></span></p>
+        </td>
+        <td><p><span><%= data.address %></span></p></td>
+        <td><p><span><%= data.description %></span></p>
+          <p><span style="font-weight: bold;">Price breakdown : </span><span><%= data.price_breakdown %></span></p>
+        </td>
+        <td>
+          <p><%=data.total%></p>
+          <p><span style="font-weight: bold;">Paid</span></p>
+        </td>
+        <td><%=data.status%></td>
+    </tr>         
+    <%});} else{%>
+      <p>You haven't ordered anything yet.<br>Browse our <a href="menu" style="color: blue;">menu </a> to order your favorite food.</p>
+    <%}%> 
+  </table>
+
+      <!-- <div class="box-container">
         <%
         if(data.length > 0)
         {
@@ -65,7 +101,7 @@
           <p>name : <span><%= user.firstname %> <%= user.lastname %></span></p>
           <p>number : <span><%= user.phone %></span></p>
           <p>email : <span><%= user.email %></span></p>
-          <p>address : <span><%= user.address %></span></p>
+          <p>address : <span><%= data.address %></span></p>
           <p>description : <span><%= data.description %></span></p>
           <p>price breakdown : <span><%= data.price_breakdown %></span></p>
           <p>instruction : <span><%= data.instruction %></span></p>
@@ -74,7 +110,7 @@
           });
         }
         %>
-      </div>
+      </div> -->
 
     </section>
 

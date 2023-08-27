@@ -93,7 +93,8 @@
 .tbl th {
   font-size: 1.5rem;
   /* background-color: #47C0BD; */
-  background-color: var(--blue);
+  /* background-color: var(--blue); */
+  background-color: var(--black);
   color: white;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
