@@ -28,33 +28,38 @@
           <nav class="navbar">
             <a href="home">Home</a>
             <a href="menu">Menu</a>
-            <a href="orders">Orders</a>
+            <% if(!user){ %>
+              <div class="dropdown">
+                <button type="button" onclick="expand()" class="dropbtn">
+                  Login or Register
+                  <!-- <div class="fas fa-user"></div> -->
+                </button>
+                <div id="myDropdown" class="dropdown-content">
+                  <a href="login">Login</a>
+                  <a href="register">Register</a>
+                </div>
+              </div>
+            <% } else { %>
+              <div class="dropdown">
+                <button type="button" onclick="expand()" class="dropbtn">
+                  Hi <%=user.firstname %>
+                </button>
+                <div id="myDropdown" class="dropdown-content">
+                  <a href="cart">Your cart</a>
+                  <a href="orders">Your orders</a>
+                  <a href="makeReservation">Reserve table</a>
+                  <a href="logout">Logout</a>
+                </div>
+              </div>
+            <% } %>
           </nav>
           <div class="icons">
-            <a href="cart"><i class="fas fa-shopping-cart"></i></a>
-            <div id="user-btn" class="fas fa-user"></div>
             <div id="menu-btn" class="fas fa-bars"></div>
-          </div>
-          <div class="profile">
-            <% if(!user){ %>
-            <p class="name">Please login or register</p>
-            <div class="flex">
-              <a href="login" class="btn"><span>login </span></a>
-              <a href="register" class="btn delete-btn"
-                ><span>register </span></a
-              >
-            </div>
-            <% } else { %>
-            <p class="name"><%=user.firstname %></p>
-            <div class="flex">
-              <a href="profile" class="btn"><span>profile </span></a>
-              <a href="logout" class="btn delete-btn"><span>logout </span></a>
-            </div>
-            <% } %>
           </div>
         </div>
       </section>
     </header>
+
     <section class="showcase">
       <video
         src="videos/Restaurant food cinematic.mp4"
@@ -92,7 +97,7 @@
     <section class="products">
       <!-- <h1 class="title">Our Most Popular Items</h1> -->
       <!-- kete dio chaile -->
-      <p class="title"><span>Our Most Popular Items</span></p> 
+      <p class="title"><span>Popular Items</span></p> 
       <div class="swiper reviews-slider">
         <div class="swiper-wrapper">
           <% if(data.length > 0) { data.forEach(function(data){ 
@@ -100,7 +105,6 @@
             disprice = parseFloat(data.price) - ((parseFloat(data.price) * parseFloat(data.discount)) / 100.0)%>
           <div class="swiper-slide slide">
             <form action="/addToCart" method="post" class="box">
-              <!-- <a href="quick_view.html" class="fas fa-eye"></a> -->
               <button
                 class="fas fa-shopping-cart"
                 type="submit"
@@ -172,7 +176,7 @@
         </div>
       </section>
 
-      <div class="credit">Made with ❤️ by <span>Mitu & Saif</span></div>
+      <div class="credit"><hr style="border: .1rem solid #aaaaaa;">Made with ❤️ by <span>Mitu & Saif</span></div>
     </footer>
 
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
