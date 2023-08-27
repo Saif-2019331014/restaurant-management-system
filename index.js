@@ -590,7 +590,7 @@ console.log(values)
 });
 
 app.post("/reciept", (req, res) => {
-  res.render("reciept", {user:req.session.user, desc:req.body.description, pb:req.body.price_breakdown, total:req.body.total}); // parameter
+  res.render("reciept", {user:req.session.user, desc:req.body.description, pb:req.body.price_breakdown, ins:req.body.instruction, total:req.body.total}); // parameter
 });
 
 app.get("/register", (req, res) => {

@@ -40,28 +40,33 @@
 			<table>
 				<tr class="tabletitle">
 				<td class="item"><h2>Items Ordered</h2></td>
-				<td class="Rate"><h2 style="padding-left: 10rem;">Sub Total</h2></td>
+				<%if(pb){%> <td class="Rate"><h2 style="padding-left: 10rem;">Sub Total</h2></td><%}%>
 				</tr>
 
 				<tr class="price_breakdown">
-				<td class="tableitem"><p class="itemtext"><%=desc%></p></td>
-				<td class="tableitem"><p class="itemtext" style="padding-left: 10rem;"><%=pb%></p></td>
+				<td class="tableitem"><p class="itemtext" style="font-size: larger;"><%=desc%></p></td>
+				<%if(pb){%> <td class="tableitem"><p class="itemtext" style="padding-left: 10rem;"><%=pb%></p></td><%}%>
 				</tr>
 
-
+        <%if(total){%>
 				<tr class="total">
-				<td class="Rate"><h2>Total</h2></td>
-				<td class="payment" style="padding-left: 10rem;"><h3> BDT <%=total%></h3></td>
-				</tr>
+				<td class="Rate"><h2 style="margin-top: 1.5rem;">Total</h2></td>
+				<td class="payment" style="padding-left: 10rem; margin-top: 1.5rem;"><h2> BDT <%=total%></h2></td>
+				</tr><%}else{%>
+          <tr class="total">
+          <td class="Rate"><h2 style="margin-top: 1.5rem;">Guest Instruction: </h2></td>
+          <td class="payment"><p style="margin-top: 1.5rem; font-size: larger;"><%=ins%></p></td>
+          </tr><%}%>
 
 			</table>
 			</div>
 
+      <%if(total){%>
 			<center id="bottom">
             <div class="info"> 
             <h3>Thank you for your interest!</h3>
             </div>
-            </center>
+            </center><%}%>
 
 		</div>
 

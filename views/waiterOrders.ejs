@@ -70,6 +70,12 @@
                   </select>
                 </form>
             </td>
+            <td><form action="/reciept" method="post">
+              <input type="hidden" name="description" value="<%=data.description%>">
+              <input type="hidden" name="instruction" value="<%=data.instruction%>">
+              <button class="btn" style="background-color: black; padding: 7px;"><span>Reciept</span></button>
+            </form>
+          </td>
             <%}else if(data.status==='Served'){%>
             <td>
                 <form action="/changeStatus" method="post">
@@ -80,6 +86,9 @@
                         <option value="Paid">Paid</option>
                     </select>
                 </form>
+            </td>
+            <td>
+              
             </td>
             <%}else{%>
             <td style="color: var(--green)">Paid</td>
