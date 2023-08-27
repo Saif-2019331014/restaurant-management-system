@@ -273,7 +273,7 @@ app.get("/adminDashboard", (req, res) => {
     db.query(q1, (err, data1) => {
       if (err) res.json("error");
       else {
-        const q2 = `SELECT * FROM dineIns WHERE createdAt LIKE '${date}%'`;
+        const q2 = `SELECT * FROM dineIns WHERE createdAt LIKE '${date}%' ORDER BY createdAt DESC`;
 
 
         db.query(q2, (err, data2) => {
@@ -286,7 +286,7 @@ app.get("/adminDashboard", (req, res) => {
               if (data2[i].status === "Paid") info.total += data2[i].total;
             }
 
-            const q3 = `SELECT * FROM onlineOrders WHERE createdAt LIKE '${date}%'`;
+            const q3 = `SELECT * FROM onlineOrders WHERE createdAt LIKE '${date}%' ORDER BY createdAt DESC`;
             console.log(q2, q3)
 
             db.query(q3, (err, data3) => {
@@ -587,6 +587,10 @@ console.log(values)
       }
     });
   }
+});
+
+app.post("/reciept", (req, res) => {
+  res.render("reciept", {user:req.session.user, desc:req.body.description, pb:req.body.price_breakdown, total:req.body.total}); // parameter
 });
 
 app.get("/register", (req, res) => {

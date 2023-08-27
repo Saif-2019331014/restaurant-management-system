@@ -642,7 +642,7 @@ section {
   overflow: hidden;
 }
 
-.products .slide .box .fa-shopping-cart {
+/* .products .slide .box .fa-shopping-cart {
   position: absolute;
   top: 1rem;
   display: block;
@@ -666,7 +666,7 @@ section {
 .products .slide .box .fa-shopping-cart:hover {
   background-color: var(--black);
   color: var(--white);
-}
+} */
 
 .products .slide .box img {
   height: 20rem;
@@ -776,7 +776,7 @@ section {
   flex-wrap: wrap;
   gap: 1.5rem;
   align-items: center;
-  width: 75%;
+  width: 70%;
 }
 
 .products .cart-total input {

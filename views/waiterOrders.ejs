@@ -49,6 +49,7 @@
             <th>Created At</th>
             <th>Instruction</th>
             <th>Status</th>
+            <th>Action</th>
           </tr>
           <%data.forEach(function(data){%>
           <tr>
@@ -82,6 +83,13 @@
             </td>
             <%}else{%>
             <td style="color: var(--green)">Paid</td>
+            <td><form action="/reciept" method="post">
+              <input type="hidden" name="description" value="<%=data.description%>">
+              <input type="hidden" name="price_breakdown" value="<%=data.price_breakdown%>">
+              <input type="hidden" name="total" value="<%=data.total%>">
+              <button class="btn" style="background-color: black; padding: 7px;"><span>Reciept</span></button>
+            </form>
+          </td>
             <%}%>
         </tr>         
         <%});} else{%>

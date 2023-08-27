@@ -105,12 +105,12 @@
             disprice = parseFloat(data.price) - ((parseFloat(data.price) * parseFloat(data.discount)) / 100.0)%>
           <div class="swiper-slide slide">
             <form action="/addToCart" method="post" class="box">
-              <button
+              <!-- <button
                 class="fas fa-shopping-cart"
                 type="submit"
                 name="id"
                 value="<%=data.id%>"
-              ></button>
+              ></button> -->
               <img src="<%=img%>" alt="" />
               <h2 style="color: darkgray;"><%= data.type %></h2>
               <div class="name"><%= data.title %></div>
@@ -132,6 +132,16 @@
                   value="1"
                   onkeypress="if(this.value.length == 2) return false;"
                 />
+              </div>
+              <div class="addtocart" style="display: flex;">
+                <button class="btn"
+                type="submit"
+                name="id"
+                value="<%=data.id%>"
+                style="width: 100%;"
+                >
+                Add to Cart
+                </button>
               </div>
             </form>
           </div>

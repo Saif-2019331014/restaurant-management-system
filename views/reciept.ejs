@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reciept</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <link rel="stylesheet" href="/css/reciept.css"
+    />
+</head>
+<body>
+    
+<div id="invoice-POS">
+    
+    <center id="top">
+      <div class="info"> 
+        <h2>La Ratatouille</h2>
+      </div>
+    </center>
+    
+    <div id="mid">
+      <div class="info">
+        <h2>Contact Info</h2>
+        <p> 
+            Address : Sylhet, Bangladesh</br>
+            Email   : laratatoulli@gmail.com</br>
+            Phone   : +8801640922106</br>
+        </p>
+      </div>
+    </div>
+    
+    <div id="bot">
+
+		<div id="table" style="margin-top: 2rem;">
+			<table>
+				<tr class="tabletitle">
+				<td class="item"><h2>Items Ordered</h2></td>
+				<td class="Rate"><h2 style="padding-left: 10rem;">Sub Total</h2></td>
+				</tr>
+
+				<tr class="price_breakdown">
+				<td class="tableitem"><p class="itemtext"><%=desc%></p></td>
+				<td class="tableitem"><p class="itemtext" style="padding-left: 10rem;"><%=pb%></p></td>
+				</tr>
+
+
+				<tr class="total">
+				<td class="Rate"><h2>Total</h2></td>
+				<td class="payment" style="padding-left: 10rem;"><h3> BDT <%=total%></h3></td>
+				</tr>
+
+			</table>
+			</div>
+
+			<center id="bottom">
+            <div class="info"> 
+            <h3>Thank you for your interest!</h3>
+            </div>
+            </center>
+
+		</div>
+
+  </div>
+</body>
+</html>
