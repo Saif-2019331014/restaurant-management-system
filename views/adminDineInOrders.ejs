@@ -41,44 +41,39 @@
     <div class="report">
       <h3 class="title">Order History</h3>
     </div>
-
-    <table class="tbl" style="margin-bottom: 5rem">
-      <%if(data.length > 0){%>
-      <tr>
-        <th>Order ID</th>
-        <th>Table ID</th>
-        <th>Staff ID</th>
-        <th>Description</th>
-        <th>Price Breakdown</th>
-        <th>Total</th>
-        <th>Created At</th>
-        <th>Instruction</th>
-        <th>Status</th>
-      </tr>
-      <%data.forEach(function(data){%>
-      <tr>
-        <td><%=data.id%></td>
-        <td><%=data.table_id%></td>
-        <td><%=data.staff_id%></td>
-        <td><%=data.description%></td>
-        <td><%=data.price_breakdown%></td>
-        <td><%=data.total%></td>
-        <td><%=data.createdAt%></td>
-        <td><%=data.instruction%></td>
-        <%if(data.status==='Paid'){%>
-        <td style="color: var(--green)">Paid</td>
-        <%} else if(data.status==='Served'){%>
-        <td style="color: var(--dark-blue)">Served</td>
-        <%} else {%>
-        <td style="color: var(--blue)">Processing</td>
-        <%}%>
-      </tr>
-      <%});} else{%>
-      <tr>
-        <td>No orders yet!</td>
-      </tr>
-      <%}%>
-    </table>
+    
+        <table class="tbl" style="margin-bottom: 5rem">
+            <%if(data.length > 0){%>
+          <tr>
+            <th>Order ID</th>
+            <th>Table ID</th>
+            <th>Staff ID</th>
+            <th>Description</th>
+            <th>Price Breakdown</th>
+            <th>Total</th>
+            <th>Created At</th>
+            <th>Instruction</th>
+            <th>Status</th>
+          </tr>
+          <%data.forEach(function(data){%>
+          <tr>
+            <td><%=data.id%></td>
+            <td><%=data.table_id%></td>
+            <td><%=data.staff_id%></td>
+            <td><%=data.description%></td>
+            <td><%=data.price_breakdown%></td>
+            <td><%=data.total%></td>
+            <td><%=data.createdAt%></td>
+            <td><%=data.instruction%></td>
+            <%if(data.status==='Paid'){%><td style="color: var(--green)">Paid</td><%}
+            else if(data.status==='Served'){%><td style="color: var(--dark-blue)">Served</td><%}
+            else {%><td style="color: var(--yellow)">Processing</td><%}%>
+        </tr>         
+        <%});} else{%>
+          <tr><td>No orders yet!</td></tr>
+        <%}%> 
+      </table>
+    
 
     <script src="js/loader.js"></script>
     <script src="js/script.js"></script>

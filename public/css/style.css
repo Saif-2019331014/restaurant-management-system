@@ -155,7 +155,8 @@ section {
   font-size: 4rem;
   color: var(--black);
   text-decoration: underline;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
+  text-transform: uppercase;
   text-underline-offset: 1rem;
   padding-top: 4rem;
 }

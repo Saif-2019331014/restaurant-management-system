@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Add menu item</title>
+    <title>Modify Menu</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
@@ -24,11 +24,11 @@
         <div class="right">
           <nav class="navbar">
             <a href="/adminDashboard" class="links">Dashboard</a>
-            <a href="/adminDineInOrders">Dine In Orders</a>
-            <a href="/adminOnlineOrders">Online Orders</a>
+            <a href="/adminDineInOrders">Dine-Ins</a>
+            <a href="/adminOnlineOrders">Deliveries</a>
             <a href="/adminReservations">Reservations</a>
-            <a href="#" class="links" id="actv">Add Item</a>
-            <a href="/adminModifyItem" class="links">Modify Item</a>
+            <a href="/adminAddItem" class="links">Add Item</a>
+            <a href="#" class="links" id="actv">Modify Item</a>
             <a href="/logout" class="links">Logout</a>
           </nav>
           <div class="icons">
@@ -39,9 +39,10 @@
     </header>
 
     <section class="form-container">
-      <form action="/adminAddItem" method="post" enctype="multipart/form-data">
+      <form action="/adminModifyItem" method="post">
         <div class="safety">
           <h3>Modify Item</h3>
+          <input type="hidden" name="id" value="<%= data.id %>">
           <input
             type="text"
             required
@@ -49,7 +50,7 @@
             name="title"
             placeholder="Item name"
             class="box"
-            value="<%=title%>"
+            value="<%=data.title%>"
           />
           <input
             type="text"
@@ -58,7 +59,7 @@
             name="content"
             placeholder="Description of item"
             class="box"
-            value="<%=content%>"
+            value="<%=data.content%>"
           />
           <input
             type="text"
@@ -67,7 +68,7 @@
             name="type"
             placeholder="Item type"
             class="box"
-            value="<%=type%>"
+            value="<%=data.type%>"
           />
           <div class="box cal">
             <label
@@ -80,7 +81,7 @@
               required
               min="1"
               max="10000"
-              value="<%=price%>"
+              value="<%=data.price%>"
               name="price"
               class="qty"
               onkeypress="if(this.value.length == 5) return false;"
@@ -96,7 +97,7 @@
               type="number"
               min="0"
               max="99"
-              value="0"
+              value="<%=data.discount%>"
               name="discount"
               class="qty"
               onkeypress="if(this.value.length == 2) return false;"
@@ -104,13 +105,27 @@
           </div>
           <div class="box cal">
             <label
+              for="availability"
+              style="color: var(--light-color); padding-right: 1rem"
+              >Availability 
+            </label>
+            <input
+              type="checkbox" 
+              name="availability" 
+              value="Yes"
+              checked
+              style="background-color: black;"
+            />
+          </div>
+          <!-- <div class="box cal">
+            <label
               for="image"
               style="color: var(--light-color); padding-right: 1rem"
               >Preview:
             </label>
             <input type="file" name="image" style="font-size: 1.5rem" />
-          </div>
-          <button type="submit" class="btn"><span>Add Item </span></button>
+          </div> -->
+          <button type="submit" class="btn" style="background-color: black;"><span>Confirm Change</span></button>
         </div>
       </form>
     </section>

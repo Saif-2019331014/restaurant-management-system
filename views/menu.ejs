@@ -21,7 +21,6 @@
       <img id="pizza" src="images/pizza-loading.svg" alt="loading screen" />
       <p class="loading">Loading...</p>
     </div> -->
-
     <header class="header">
       <section class="flex">
         <a href="home" class="logo">La Ratatouille</a>
@@ -58,20 +57,21 @@
     </header>
 
     <section class="products">
-      <h1 class="title">Our Menu</h1>
+      <!-- <h1 class="title">Our Menu</h1> -->
+      <p class="title"><span>Our Menu</span></p> 
+      <%if(category.length > 0){%>
       <div class="filter-btns">
         <button type="button" class="filter-btn" id="All">All</button>
-        <button type="button" class="filter-btn" id="Pizza">Pizza</button>
-        <button type="button" class="filter-btn" id="Pasta">Pasta</button>
-        <button type="button" class="filter-btn" id="Dessert">Dessert</button>
-        <button type="button" class="filter-btn" id="Drinks">Drinks</button>
-        <button type="button" class="filter-btn" id="Salad">Salad</button>
-        <button type="button" class="filter-btn" id="Soup">Soup</button>
+        <%category.forEach(function(category){%>
+        <button type="button" class="filter-btn" id="<%=category.type%>"><%=category.type%></button>
+        <%});%>
       </div>
+      <%}%>
 
       <div class="box-container">
         <% if(data.length > 0) { data.forEach(function(data){ 
-          const img = "/images/" + data.title + ".jpg"%>
+          const img = "/images/" + data.title + ".jpg"
+          disprice = parseFloat(data.price) - ((parseFloat(data.price) * parseFloat(data.discount)) / 100.0)%>
         <form
           action="/addToCart"
           method="post"
@@ -84,11 +84,15 @@
             value="<%=data.id%>"
           ></button>
           <img src="<%=img%>" alt="" />
-          <a href="category.html" class="cat"><%= data.type %></a>
+          <h2 style="color: darkgray;"><%= data.type %></h2>
           <div class="name"><%= data.title %></div>
           <div class="flex">
             <div class="price">
-              <span>BDT </span><%= data.price %><span>/-</span>
+              <%if(data.discount > 0){%>
+                <span>BDT </span><span style="text-decoration: line-through; color: red;"><%= data.price %></span><span style="font-size: 2.6rem; color: black;"> <%=disprice%></span><span>/-</span>
+              <%}else{%>
+                <span>BDT </span><%= data.price %><span>/-</span>
+              <%}%>
             </div>
             <input
               type="number"

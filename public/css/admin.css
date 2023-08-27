@@ -27,6 +27,11 @@
     rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
+.report .box-container .box:hover {
+  transform: scale(1.1);
+  /* background-color:#47C0BD; */
+}
+
 .report .box-container .box p {
   font-size: 2rem;
   display: flex;
@@ -41,6 +46,27 @@
 .report .box-container .box p span:hover {
   color: black;
 }
+
+
+/* chaile kete dite paroo */
+/* .row {
+  margin-left:-2px;
+  margin-right:-2px;
+}
+  
+.column {
+  float: left;
+  width: 50%;
+  padding: 5px;
+}
+
+/* Clearfix (clear floats) */
+/* .row::after {
+  content: "";
+  clear: both;
+  display: table;
+}  */
+/* etototuk porjonto */
 
 .tbl {
   border-collapse: collapse;
@@ -66,6 +92,7 @@
 
 .tbl th {
   font-size: 1.5rem;
+  /* background-color: #47C0BD; */
   background-color: var(--blue);
   color: white;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;

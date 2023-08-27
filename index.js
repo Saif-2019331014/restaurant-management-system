@@ -96,15 +96,14 @@ app.get("/home", (req, res) => {
 });
 
 app.get("/staffLogin", (req, res) => {
-  const errormsg = "";
+  const errormsg = '';
   if (req.session.user) {
     if (req.session.user.role === "Admin") {
       res.redirect("adminDashboard");
     } else if (req.session.user.role === "Waiter") {
-      res.redirect("waiter_orders"); /// not implemented yet
+      res.redirect("waiterOrders");
     } else {
       res.redirect("error_page");
-      // res.json('You do not have access to this page')
     }
   } else res.render("staffLogin", { user: req.session.user, errormsg });
 });
@@ -116,7 +115,6 @@ app.post("/staffLogin", (req, res) => {
 
   db.query(q, (err, data) => {
     if (err || data.length === 0) {
-      // res.json("Wrong email!");
       const errormsg = "Wrong email";
       res.render("staffLogin", { errormsg });
     } else {
@@ -126,13 +124,11 @@ app.post("/staffLogin", (req, res) => {
         bcrypt.compare(password, hash, function (err, matches) {
           if (matches) {
             req.session.user = data[0];
-            console.log(req.session.user);
             console.log(req.session.user.role);
             if (req.session.user.role === "Admin") {
               res.redirect("adminDashboard");
-            } else res.redirect("waiterOrders"); /// not implemented yet
+            } else res.redirect("waiterOrders");
           } else {
-            // res.json("Wrong password!");
             const errormsg = "Wrong password";
             res.render("staffLogin", { errormsg });
           }
@@ -151,6 +147,25 @@ app.get("/adminAddItem", (req, res) => {
   }
 });
 
+app.post("/adminAddItem", upload.single("image"), (req, res) => {
+  const q = "INSERT INTO menu (title, content, type, price) VALUES (?)";
+  const values = [
+    req.body.title,
+    req.body.content,
+    req.body.type,
+    req.body.price,
+  ];
+  db.query(q, [values], (err, data) => {
+    if (err) return res.json(err);
+    else {
+      console.log("Menu item has been created successfully.");
+      res.redirect('adminMenu') //
+    }
+  });
+
+  console.log(req.file);
+});
+
 /* ekhane change korsi. thik ache kina ektu check kore dekhio */
 
 app.get("/adminModifyItem", (req, res) => {
@@ -165,35 +180,25 @@ app.get("/adminModifyItem", (req, res) => {
 });
 
 app.post("/modify", (req, res) => {
-  console.log(req.body);
-  const data = req.body;
-  res.render("modify", req.body);
+  res.render("modify", {data:req.body});
 });
 
-// app.get("/modify", (req, res) => {
-//   res.render("modify", {});
-// });
-
-/* ekhane porjonto change korsi */
-
-app.post("/adminAddItem", upload.single("image"), (req, res) => {
-  const q = "INSERT INTO menu (title, content, type, price) VALUES (?)";
-  const values = [
-    req.body.title,
-    req.body.content,
-    req.body.type,
-    req.body.price,
-  ];
-  db.query(q, [values], (err, data) => {
+app.post("/adminModifyItem", (req, res) => {
+  if(req.body.availability!='Yes') req.body.availability = false
+  else req.body.availability = true
+  const query = `UPDATE menu SET title = '${req.body.title}', type='${req.body.type}', content='${req.body.content}',`+
+                 `price=${req.body.price}, discount=${req.body.discount}, availability=${req.body.availability} WHERE id = ${req.body.id}`;
+  
+  console.log(query)
+  db.query(query, (err, data) => {
     if (err) return res.json(err);
     else {
-      console.log("Menu item has been created successfully.");
-      // res.redirect('menu') ki dibo dekhte hbe
+      res.redirect("adminModifyItem");
     }
   });
-
-  console.log(req.file);
 });
+
+/* ekhane porjonto change korsi */
 
 // default error handler
 app.use((err, req, res, next) => {
@@ -308,27 +313,43 @@ app.get("/adminDashboard", (req, res) => {
   } else res.json("You do not have access to this page");
 });
 
-app.post("/changeStatus", (req, res) => {
-  if (req.session.user) {
-    let q = "";
-    if (req.session.user.role === "Admin") {
-      q = `UPDATE onlineOrders SET status = '${req.body.status}' where id = ${req.body.id}`;
-      db.query(q, (err, data) => {
-        if (err) return res.json(err);
-        else res.redirect("adminOnlineOrders");
-      });
-    } else {
-      q = `UPDATE dineIns SET status = '${req.body.status}' where id = ${req.body.id}`;
-      db.query(q, (err, data) => {
-        if (err) return res.json(err);
-        else res.redirect("waiterOrders");
-      });
+app.post("/changeStatus", (req,res) => {
+  if(req.session.user){
+    let q = ''
+    if(req.session.user.role==='Admin'){
+      q = `UPDATE onlineOrders SET status = '${req.body.status}' where id = ${req.body.id}`
+      db.query(q,(err,data)=>{
+        if(err) return res.json(err)
+        else res.redirect("adminOnlineOrders")
+      })
+    }
+    else{
+      q = `UPDATE dineIns SET status = '${req.body.status}' where id = ${req.body.id}`
+      db.query(q,(err,data)=>{
+        if(err) return res.json(err)
+        else {
+          if(req.body.status === 'Paid'){
+            const q1 = `UPDATE tables SET availability = true WHERE id = ${req.body.table_no}`
+            db.query(q1, (err,data)=>{
+              if(err) return res.json(err)
+              else{
+                console.log('table free now')
+                res.redirect("waiterOrders")
+              }
+            })
+          }
+          else{
+            res.redirect("waiterOrders")
+          }
+          // table available korte hbe
+        }
+      })
     }
   }
-});
+})
 
 app.get("/waiterOrders", (req, res) => {
-  if (req.session.user && req.session.user.role === "Waiter") {
+  if ((req.session.user && req.session.user.role === "Waiter")) {
     const date =
       new Date().getMonth() +
       1 +
@@ -345,7 +366,7 @@ app.get("/waiterOrders", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-  const errormsg = "";
+  const errormsg = '';
   if (!req.session.user) {
     res.render("login", { user: req.session.user, errormsg });
   } else res.redirect("home");
@@ -381,48 +402,31 @@ app.post("/login", (req, res) => {
   });
 });
 
+
+
 app.get("/menu", (req, res) => {
-  // const query1 = "SELECT DISTINCT type FROM menu";
-
-  // db.query(query1, (err, category) => {
-  //   if (err) return res.json(err);
-  //   else {
-  //     const menu = [];
-  //     console.log(category)
-  //     for(let i=0;i<category.length;i++){
-  //       const query2 = `SELECT * FROM menu WHERE type = '${category[i].type}'`;
-  //       console.log(query2)
-  //       db.query(query2, (err,data)=>{
-  //         if(err) return res.json(err);
-  //         else {
-  //           for(let j=0;j<data.length;j++){
-  //             console.log(data[j])
-  //             menu.push({
-  //               title : data[j].title,
-  //               content : data[j].content,
-  //               price : data[j].price,
-  //               discount : data[j].price
-  //             })
-  //             console.log(menu.length)
-  //           }
-
-  //           res.render("menu", {
-  //             user: req.session.user,
-  //             category: category,
-  //             menu: menu
-  //           });
-  //         }
-  //       })
-  //     }
-  //   }
-  // });
 
   const query = "SELECT * FROM menu";
 
   db.query(query, (err, data) => {
     if (err) return res.json(err);
     else {
-      res.render("menu", { user: req.session.user, data: data });
+      const query1 = "SELECT DISTINCT type FROM menu";
+
+      db.query(query1, (err, category) => {
+        if (err) return res.json(err);
+        else {
+          let view = "menu"
+          if(req.session.user && req.session.user.role && req.session.user.role==='Waiter') {view = "waiterMenu"}
+          console.log(req.session.user)
+          console.log(view)
+          res.render(view, {
+            user: req.session.user,
+            data: data,
+            category: category,
+          });
+        }
+      });
     }
   });
 });
@@ -452,7 +456,11 @@ app.get("/error", (req, res) => {
 app.get("/cart", (req, res) => {
   if (!req.session.user) {
     res.redirect("login");
-  } else res.render("cart", { user: req.session.user, cart: req.session.cart });
+  } else{
+      let view = "cart"
+      if(req.session.user.role) view = "waiterCart"
+      res.render(view, { user: req.session.user, cart: req.session.cart });
+  }
 });
 
 app.get("/orders", (req, res) => {
@@ -470,8 +478,7 @@ app.get("/orders", (req, res) => {
   }
 });
 
-// view not implemented yet
-app.post("/waiterPrepapareOrder", (req, res) => {
+app.post("/waiterPrepareOrder", (req, res) => {
   if (!req.session.user) {
     res.redirect("login");
   } else {
@@ -508,11 +515,11 @@ app.post("/waiterPrepapareOrder", (req, res) => {
           else {
             console.log("table assigned to customer.");
             const q3 =
-              "INSERT INTO dineIns (customer_id, address, description, price_breakdown, total, createdAt, instruction, status) VALUES (?)";
+              "INSERT INTO dineIns (table_id, staff_id, description, price_breakdown, total, createdAt, instruction, status) VALUES (?)";
 
             const values = [
+              req.body.table_no,
               req.session.user.id,
-              req.session.user.address,
               description,
               price_breakdown,
               total,
@@ -566,7 +573,7 @@ app.post("/checkout", (req, res) => {
 
     const values = [
       req.session.user.id,
-      req.session.user.address,
+      req.body.address,
       description,
       price_breakdown,
       total,
@@ -622,8 +629,13 @@ app.post("/register", (req, res) => {
 });
 
 app.get("/logout", (req, res) => {
+  let role = ''
+  if(req.session.user && req.session.user.role){
+      role = req.session.user.role
+  }
   req.session.destroy();
-  res.redirect("home");
+  if(role === '') res.redirect("home");
+  else res.redirect("staffLogin")
 });
 
 app.get("/makeReservation", (req, res) => {
@@ -661,6 +673,22 @@ app.post("/makeReservation", (req, res) => {
   });
 });
 
+app.post("/cancelReservation", (req, res) => {
+  const q = `UPDATE tables SET availability = true WHERE id = ${req.body.table_no}`;
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+    else {
+      const q1 = `DELETE FROM reservations WHERE id = ${req.body.id}`;
+      db.query(q1, (err, data) => {
+        if (err) return res.json(err);
+        else {
+          res.redirect('adminReservations')
+        }
+      })
+    }
+  })
+})
+
 app.post("/addToCart", (req, res) => {
   if (!req.session.user) {
     res.redirect("login");
@@ -677,6 +705,7 @@ app.post("/addToCart", (req, res) => {
         }
         const title = data[0].title;
         const price = parseFloat(data[0].price);
+        const dprice = (price - price * (parseFloat(data[0].discount) / 100.0))
         const quantity = parseInt(req.body.qty);
         const subtotal =
           (price - price * (parseFloat(data[0].discount) / 100.0)) * quantity;
@@ -691,7 +720,7 @@ app.post("/addToCart", (req, res) => {
             req.session.cart[i].quantity =
               parseInt(req.session.cart[i].quantity) + parseInt(quantity);
             req.session.cart[i].subtotal +=
-              parseFloat(price) * parseInt(quantity);
+              parseFloat(dprice) * parseInt(quantity);
             break;
           }
         }
@@ -700,6 +729,8 @@ app.post("/addToCart", (req, res) => {
           req.session.cart.push({
             title: title,
             price: price,
+            discount : data[0].discount,
+            dprice : dprice,
             quantity: quantity,
             subtotal: subtotal,
           });
@@ -710,6 +741,50 @@ app.post("/addToCart", (req, res) => {
   }
 });
 
+app.post("/changeQuantity", (req,res)=>{
+  if(!req.session.user){
+      res.redirect('login')
+  }
+  else{
+
+      for(let i=0;i<req.session.cart.length;i++) {
+
+          if(req.session.cart[i].title === req.body.title) {  // product id is better than title
+              if(req.body.op === 'decrease' && req.session.cart[i].quantity>1) {
+                  req.session.cart[i].quantity--
+                  req.session.cart[i].subtotal = parseInt(req.session.cart[i].subtotal) - parseInt(req.session.cart[i].dprice)
+                  break;
+              }
+              else if(req.body.op === 'increase') {
+                  req.session.cart[i].quantity++
+                  req.session.cart[i].subtotal = parseInt(req.session.cart[i].subtotal) + parseInt(req.session.cart[i].dprice)
+                  break;
+              }
+          }
+       }
+       let view = 'cart'
+       if(req.session.user.role) view = "waiterCart"
+       res.render(view, { user: req.session.user, cart: req.session.cart });
+  }
+})
+
+app.post("/removeItem", (req,res)=>{
+  if(!req.session.user){
+    res.redirect('login')
+  }
+  else{
+    const index = req.session.cart.findIndex(object => {
+      return object.title === req.body.title;   // product id is better than title
+    });
+    if (index > -1) {
+        req.session.cart.splice(index, 1); 
+    }
+    let view = 'cart'
+    if(req.session.user.role) view = "waiterCart"
+    res.render(view, { user: req.session.user, cart: req.session.cart });
+  }
+})
+
 app.get("/clearCart", (req, res) => {
   if (!req.session.user) {
     res.redirect("login");
@@ -719,24 +794,24 @@ app.get("/clearCart", (req, res) => {
   }
 });
 
-app.get("/:id", (req, res) => {
-  const q = `SELECT * FROM menu WHERE type = '${req.params.id}'`;
+// app.get("/:id", (req, res) => {
+//   const q = `SELECT * FROM menu WHERE type = '${req.params.id}'`;
 
-  db.query(q, (err, data) => {
-    if (err) return res.json(err);
-    else {
-      if (data.length === 0) {
-        res.redirect("error");
-      } else {
-        res.render("category", {
-          user: req.session.user,
-          data: data,
-          category: req.params.id,
-        });
-      }
-    }
-  });
-});
+//   db.query(q, (err, data) => {
+//     if (err) return res.json(err);
+//     else {
+//       if (data.length === 0) {
+//         res.redirect("error");
+//       } else {
+//         res.render("category", {
+//           user: req.session.user,
+//           data: data,
+//           category: req.params.id,
+//         });
+//       }
+//     }
+//   });
+// });
 
 app.listen(8800, () => {
   console.log("Connected to backend!");

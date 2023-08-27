@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Food Menu</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/filter.css" />
+  </head>
+  <body>
+    <!-- <div class="loader">
+      <img id="pizza" src="images/pizza-loading.svg" alt="loading screen" />
+      <p class="loading">Loading...</p>
+    </div> -->
+
+    <header class="header">
+      <section class="flex">
+        <a href="#" class="logo">La Ratatouille</a>
+        <div class="right">
+          <nav class="navbar">
+            <a href="#" id="actv">Prepare a order</a>
+            <a href="waiterOrders">Orders</a>
+            <a href="logout">Logout</a>
+          </nav>
+          <div class="icons">
+            <div id="menu-btn" class="fas fa-bars"></div>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <section class="products">
+        <h1 class="title">Menu</h1>
+        <%if(category.length > 0){%>
+        <div class="filter-btns">
+          <button type="button" class="filter-btn" id="All">All</button>
+          <%category.forEach(function(category){%>
+          <button type="button" class="filter-btn" id="<%=category.type%>"><%=category.type%></button>
+          <%});%>
+        </div>
+        <%}%>
+  
+        <div class="box-container">
+          <% if(data.length > 0) { data.forEach(function(data){ 
+            const img = "/images/" + data.title + ".jpg"
+            disprice = parseFloat(data.price) - ((parseFloat(data.price) * parseFloat(data.discount)) / 100.0)%>
+          <form
+            action="/addToCart"
+            method="post"
+            class="box filter-item All <%= data.type %>"
+          >
+            <button
+              class="fas fa-shopping-cart"
+              type="submit"
+              name="id"
+              value="<%=data.id%>"
+            ></button>
+            <img src="<%=img%>" alt="" />
+            <h2 style="color: darkgray;"><%= data.type %></h2>
+            <div class="name"><%= data.title %></div>
+            <div class="flex">
+              <div class="price">
+                <%if(data.discount > 0){%>
+                <span>BDT </span><span style="text-decoration: line-through; color: red;"><%= data.price %></span><span style="font-size: 2.6rem; color: black;"> <%=disprice%></span><span>/-</span>
+              <%}else{%>
+                <span>BDT </span><%= data.price %><span>/-</span>
+              <%}%>
+              </div>
+              <input
+                type="number"
+                name="qty"
+                class="qty"
+                min="1"
+                max="99"
+                value="1"
+                onkeypress="if(this.value.length == 2) return false;"
+              />
+            </div>
+          </form>
+          <% }); } %>
+        </div>
+
+        <div class="more-btn" style="margin-top: 5rem;margin-bottom: 7rem;">
+          <a href="cart" class="btn" style="background-color: black;"><span>Prepare Order</span></a>
+        </div>
+
+        <!-- <div class="form-container" ">
+            <form action="/waiterPrepareOrder" method="post">
+              <div class="safety">
+                <input 
+                    type="number" 
+                    placeholder="Table No" 
+                    required 
+                    name="table_no" 
+                    min="0"
+                    max="10"
+                    style="padding:8px;display:block;border:none;border-bottom:1px solid #ccc;width:100%; padding-top: 16px; padding-bottom: 16px; border:1px solid #ccc"
+                    onkeypress="if(this.value.length == 2) return false;"
+                    >
+                <input type="text" placeholder="Any instructions" name="instruction" style="padding:8px;display:block;border:none;border-bottom:1px solid #ccc;width:100%; padding-top: 16px; padding-bottom: 16px; border:1px solid #ccc">
+                <button type="submit" name="submit" class="btn" style="background-color: black;"><span>Prepare Order </span></button>
+              </div>
+            </form>
+        </div> -->
+
+      </section>
+
+      <script src="js/script.js"></script>
+    <script src="js/filter.js"></script>
+  </body>
+</html>

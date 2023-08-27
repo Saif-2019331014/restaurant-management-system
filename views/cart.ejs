@@ -16,10 +16,10 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <div class="loader">
+    <!-- <div class="loader">
       <img id="pizza" src="images/pizza-loading.svg" alt="loading screen" />
       <p class="loading">Loading...</p>
-    </div>
+    </div> -->
 
     <header class="header">
       <section class="flex">
@@ -52,18 +52,25 @@
     </div> -->
 
     <section class="products">
-      <h1 class="title">your cart</h1>
+      <!-- <h1 class="title">your cart</h1> -->
+      <p class="title"><span>Your Cart</span></p> 
       <%if(!cart || (cart && cart.length===0)) {%>
       <div class="empty">
         <p>Your cart is empty :(</p>
-        <p>Go to menu to order your favorite food.</p>
-        <a href="menu" class="btn"><span>View Menu </span></a>
+        <p>Browse our <a href="menu" style="color: blue;">menu </a> to order your favorite food.</p>
       </div>
       <% } else{ %>
       <div class="box-container">
         <% let total = 0; %> <% cart.forEach(function(cart){ total +=
-        cart.subtotal; %>
+        cart.subtotal; const img = "/images/" + cart.title + ".jpg" 
+        disprice = parseFloat(cart.price) - ((parseFloat(cart.price) * parseFloat(cart.discount)) / 100.0)%>
         <div class="box">
+          <form action="/removeItem", method="post">
+            <input
+                type="hidden"
+                name="title"
+                value="<%= cart.title %>"
+              />
           <button
             class="fas fa-times"
             type="submit"
@@ -71,12 +78,20 @@
             onclick="return confirm('delete this item?')"
             style="border-radius: 50%; border: none"
           ></button>
-          <img src="/images/Black Forest Cake.jpg" alt="" />
+        </form>
+          <img src="<%=img%>" alt="" />
           <div class="name"><%= cart.title %></div>
           <div class="flex">
-            <div class="price"><span>BDT </span><%= cart.price %></div>
+            <div class="price">
+              <%if(cart.discount > 0){%>
+                <span>BDT </span><span style="text-decoration: line-through; color: red;"><%= cart.price %></span><span style="font-size: 2.6rem; color: black;"> <%=disprice%></span><span>/-</span>
+              <%}else{%>
+                <span>BDT </span><%= cart.price %><span>/-</span>
+              <%}%>
+            </div>
             <div class="op">
-              <button
+              <form action="/changeQuantity" method="post">
+                <button
                 type="submit"
                 name="op"
                 value="decrease"
@@ -98,6 +113,11 @@
                   />
                 </svg>
               </button>
+              <input
+                type="hidden"
+                name="title"
+                value="<%= cart.title %>"
+              />
               <input
                 type="number"
                 name="qty"
@@ -129,6 +149,8 @@
                   />
                 </svg>
               </button>
+              </form>
+              
             </div>
           </div>
           <div class="sub-total">
@@ -148,24 +170,22 @@
       </div>
 
       <form action="/checkout" method="post" class="box">
-        <!-- <div class="instruction">
+        <div class="cart-total">
+          <div style="width:100%; text-align: center;">
+            <h3 style="font-size: 2.5rem;">Delivery Info</h3>
+          </div>
           <input
             type="text"
             maxlength="255"
             name="instruction"
             placeholder="Add any instruction..."
-            class="box"
+            style="font-size: 1.75rem;"
           />
-        </div> -->
-        <div class="cart-total">
-          <div style="width:100%; text-align: center;">
-            <h3 style="font-size: 2.5rem;">Shipping Info</h3>
-          </div>
           <input
             type="text"
             required
             maxlength="255"
-            name="fname"
+            name="address"
             placeholder="Enter your address"
             style="font-size: 1.75rem;"
           />

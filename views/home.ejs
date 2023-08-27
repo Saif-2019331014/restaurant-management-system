@@ -73,11 +73,11 @@
           elegance and comfort. Join us for an unforgettable dining experience
           that transcends the ordinary.
         </p>
-        <a href="#">see the menu</a>
+        <a href="menu">see the menu</a>
       </div>
     </section>
 
-    <section class="category">
+    <!-- <section class="category">
       <h1 class="title">food category</h1>
       <div class="box-container">
         <% if(category.length > 0) { category.forEach(function(category){ %>
@@ -87,13 +87,17 @@
         </a>
         <% }); } %>
       </div>
-    </section>
+    </section> -->
 
     <section class="products">
-      <h1 class="title">Menu</h1>
+      <!-- <h1 class="title">Our Most Popular Items</h1> -->
+      <!-- kete dio chaile -->
+      <p class="title"><span>Our Most Popular Items</span></p> 
       <div class="swiper reviews-slider">
         <div class="swiper-wrapper">
-          <% if(data.length > 0) { data.forEach(function(data){ %>
+          <% if(data.length > 0) { data.forEach(function(data){ 
+            const img = "/images/" + data.title + ".jpg"
+            disprice = parseFloat(data.price) - ((parseFloat(data.price) * parseFloat(data.discount)) / 100.0)%>
           <div class="swiper-slide slide">
             <form action="/addToCart" method="post" class="box">
               <!-- <a href="quick_view.html" class="fas fa-eye"></a> -->
@@ -103,12 +107,16 @@
                 name="id"
                 value="<%=data.id%>"
               ></button>
-              <img src="images/food.jpeg" alt="" />
-              <a href="category.html" class="cat"><%= data.type %></a>
+              <img src="<%=img%>" alt="" />
+              <h2 style="color: darkgray;"><%= data.type %></h2>
               <div class="name"><%= data.title %></div>
               <div class="flex">
                 <div class="price">
-                  <span>BDT </span><%= data.price %><span>/-</span>
+                  <%if(data.discount > 0){%>
+                    <span>BDT </span><span style="text-decoration: line-through; color: red;"><%= data.price %></span><span style="font-size: 2.6rem; color: black;"> <%=disprice%></span><span>/-</span>
+                  <%}else{%>
+                    <span>BDT </span><%= data.price %><span>/-</span>
+                  <%}%>
                 </div>
                 <span class="qt">Qty:</span>
                 <input
@@ -124,166 +132,9 @@
             </form>
           </div>
           <% }); } %>
-          <!-- <div class="swiper-slide slide">
-            <form accept="" method="post" class="box">
-              <a href="quick_view.html" class="fas fa-eye"></a>
-              <button
-                class="fas fa-shopping-cart"
-                type="submit"
-                name="add_to_cart"
-              ></button>
-              <img src="images/food.jpeg" alt="" />
-              <a href="category.html" class="cat">pizza</a>
-              <div class="name">Margherita</div>
-              <div class="flex">
-                <div class="price"><span>BDT</span>500<span>/-</span></div>
-                <input
-                  type="number"
-                  name="qty"
-                  class="qty"
-                  min="1"
-                  max="99"
-                  value="1"
-                  onkeypress="if(this.value.length == 2) return false;"
-                />
-              </div>
-            </form>
-          </div>
-          <div class="swiper-slide slide">
-            <form accept="" method="post" class="box">
-              <a href="quick_view.html" class="fas fa-eye"></a>
-              <button
-                class="fas fa-shopping-cart"
-                type="submit"
-                name="add_to_cart"
-              ></button>
-              <img src="images/food.jpeg" alt="" />
-              <a href="category.html" class="cat">pizza</a>
-              <div class="name">Margherita</div>
-              <div class="flex">
-                <div class="price"><span>BDT</span>500<span>/-</span></div>
-                <input
-                  type="number"
-                  name="qty"
-                  class="qty"
-                  min="1"
-                  max="99"
-                  value="1"
-                  onkeypress="if(this.value.length == 2) return false;"
-                />
-              </div>
-            </form>
-          </div>
-          <div class="swiper-slide slide">
-            <form accept="" method="post" class="box">
-              <a href="quick_view.html" class="fas fa-eye"></a>
-              <button
-                class="fas fa-shopping-cart"
-                type="submit"
-                name="add_to_cart"
-              ></button>
-              <img src="images/food.jpeg" alt="" />
-              <a href="category.html" class="cat">pizza</a>
-              <div class="name">Margherita</div>
-              <div class="flex">
-                <div class="price"><span>BDT</span>500<span>/-</span></div>
-                <input
-                  type="number"
-                  name="qty"
-                  class="qty"
-                  min="1"
-                  max="99"
-                  value="1"
-                  onkeypress="if(this.value.length == 2) return false;"
-                />
-              </div>
-            </form>
-          </div>
-          <div class="swiper-slide slide">
-            <form accept="" method="post" class="box">
-              <a href="quick_view.html" class="fas fa-eye"></a>
-              <button
-                class="fas fa-shopping-cart"
-                type="submit"
-                name="add_to_cart"
-              ></button>
-              <img src="images/food.jpeg" alt="" />
-              <a href="category.html" class="cat">pizza</a>
-              <div class="name">Margherita</div>
-              <div class="flex">
-                <div class="price"><span>BDT</span>500<span>/-</span></div>
-                <input
-                  type="number"
-                  name="qty"
-                  class="qty"
-                  min="1"
-                  max="99"
-                  value="1"
-                  onkeypress="if(this.value.length == 2) return false;"
-                />
-              </div>
-            </form>
-          </div>
-          <div class="swiper-slide slide">
-            <form accept="" method="post" class="box">
-              <a href="quick_view.html" class="fas fa-eye"></a>
-              <button
-                class="fas fa-shopping-cart"
-                type="submit"
-                name="add_to_cart"
-              ></button>
-              <img src="images/food.jpeg" alt="" />
-              <a href="category.html" class="cat">pizza</a>
-              <div class="name">Margherita</div>
-              <div class="flex">
-                <div class="price"><span>BDT</span>500<span>/-</span></div>
-                <input
-                  type="number"
-                  name="qty"
-                  class="qty"
-                  min="1"
-                  max="99"
-                  value="1"
-                  onkeypress="if(this.value.length == 2) return false;"
-                />
-              </div>
-            </form>
-          </div> -->
         </div>
         <div class="swiper-pagination"></div>
       </div>
-
-      <!-- <div class="box-container">
-        <% if(data.length > 0) { data.forEach(function(data){ %>
-
-        <form accept="" method="post" class="box">
-          <a href="quick_view.html" class="fas fa-eye"></a>
-          <button
-            class="fas fa-shopping-cart"
-            type="submit"
-            name="add_to_cart"
-          ></button>
-          <img src="images/food.jpeg" alt="" />
-          <a href="category.html" class="cat"><%= data.type %></a>
-          <div class="name"><%= data.title %></div>
-          <div class="flex">
-            <div class="price">
-              <span>BDT</span><%= ' '+data.price %><span>/-</span>
-            </div>
-            <input
-              type="number"
-              name="qty"
-              class="qty"
-              min="1"
-              max="99"
-              value="1"
-              onkeypress="if(this.value.length == 2) return false;"
-            />
-          </div>
-        </form>
-
-        <% }); } %>
-      </div> -->
 
       <div class="more-btn">
         <a href="menu" class="btn"><span>view all </span></a>

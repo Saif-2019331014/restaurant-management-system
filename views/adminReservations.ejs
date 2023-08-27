@@ -24,8 +24,8 @@
         <div class="right">
           <nav class="navbar">
             <a href="/adminDashboard">Dashboard</a>
-            <a href="/adminDineInOrders">Dine In Orders</a>
-            <a href="/adminOnlineOrders">Online Orders</a>
+            <a href="/adminDineInOrders">Dine-Ins</a>
+            <a href="/adminOnlineOrders">Deliveries</a>
             <a href="#" id="actv">Reservations</a>
             <a href="/adminAddItem">Add Item</a>
             <a href="/adminModifyItem">Modify Item</a>
@@ -50,6 +50,7 @@
             <th>Customer ID</th>
             <th>No of Guests</th>
             <th>Arrival Time</th>
+            <th>Action</th>
           </tr>
           <%data.forEach(function(data){%>
           <tr>
@@ -58,6 +59,12 @@
             <td><%=data.customer_id%></td>
             <td><%=data.guests%></td>
             <td><%=data.time%></td>
+            <td><form action="/cancelReservation" method="post">
+                <input type="hidden" name="table_no" value="<%=data.table_id%>">
+                <input type="hidden" name="id" value="<%=data.id%>">
+                <button class="btn change" style="background-color: black; padding: 7px"><span>Cancel</span></button>
+              </form>
+            </td>
         </tr>         
         <%});} else{%>
           <tr><td>No reservations yet!</td></tr>

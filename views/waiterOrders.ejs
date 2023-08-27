@@ -23,9 +23,9 @@
         <a href="#" class="logo">La Ratatouille</a>
         <div class="right">
           <nav class="navbar">
-            <a href="/kichuektanam">Prepare a order</a>
+            <a href="menu">Prepare a order</a>
             <a href="#" id="actv">Orders</a>
-            <a href="/logout">Logout</a>
+            <a href="logout">Logout</a>
           </nav>
           <div class="icons">
             <div id="menu-btn" class="fas fa-bars"></div>
@@ -73,6 +73,7 @@
             <td>
                 <form action="/changeStatus" method="post">
                     <input type="hidden" name="id" value="<%=data.id%>" />
+                    <input type="hidden" name="table_no" value="<%=data.table_id%>" />
                     <select name="status" class="sel" onchange="this.form.submit()">
                         <option value="Served">Served</option>
                         <option value="Paid">Paid</option>
