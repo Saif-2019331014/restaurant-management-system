@@ -85,6 +85,7 @@ app.get("/home", (req, res) => {
             user: req.session.user,
             data: data,
             category: category,
+            cart: req.session.cart,
           });
         }
       });
@@ -391,6 +392,7 @@ app.post("/login", (req, res) => {
           console.log(matches);
           if (matches) {
             req.session.user = data[0];
+            req.session.cart = [];
             res.redirect("home");
           } else {
             // res.json("Wrong password!");
@@ -425,6 +427,7 @@ app.get("/menu", (req, res) => {
             user: req.session.user,
             data: data,
             category: category,
+            cart: req.session.cart,
           });
         }
       });
@@ -471,7 +474,7 @@ app.get("/orders", (req, res) => {
     db.query(q, (err, data) => {
       if (err) return res.json(err);
       else {
-        res.render("orders", { user: req.session.user, data: data });
+        res.render("orders", { user: req.session.user, data: data, cart: req.session.cart });
       }
     });
   }
@@ -641,15 +644,20 @@ app.get("/logout", (req, res) => {
 });
 
 app.get("/makeReservation", (req, res) => {
+  const msg = '';
   if (!req.session.user) {
     res.redirect("login");
-  } else res.render("makeReservation", { user: req.session.user });
+  } else res.render("makeReservation", { user: req.session.user, cart: req.session.cart, msg });
 });
 
 app.post("/makeReservation", (req, res) => {
   const q1 = `SELECT id FROM tables WHERE capacity >= ${req.body.guests} AND availability = true ORDER BY capacity ASC`;
   db.query(q1, (err, data) => {
-    if (err || data.length === 0) res.json("Sorry, table not available");
+    if (err || data.length === 0) {
+      // res.json("Sorry, table not available");
+      const msg = 'Reservation failed! No table available right now.';
+      res.render('makeReservation', { user: req.session.user, cart: req.session.cart, msg })
+    }
     else {
       const q2 = `UPDATE tables SET availability = false WHERE id = ${data[0].id}`;
       db.query(q2, (err, data) => {
@@ -668,7 +676,9 @@ app.post("/makeReservation", (req, res) => {
         if (err) return res.json(err);
         else {
           console.log("Reservation has been done successfully.");
-          res.redirect("home");
+          // res.redirect("home");
+          const msg = 'Reservation successful! See you soon.';
+          res.render('makeReservation', { user: req.session.user, cart: req.session.cart, msg })
         }
       });
     }

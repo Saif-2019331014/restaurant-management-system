@@ -1056,12 +1056,19 @@ section {
 }
 
 .form-container form .safety .deny {
-  background-color: rgba(255, 0, 0, 0.5);
+  background-color: rgba(255, 0, 0, 0.4);
   border-left: 1rem solid rgb(255, 0, 0);
   border-radius: 0.25rem;
 }
 
-.form-container form .safety .deny p {
+.form-container form .safety .success {
+  background-color: rgba(0, 255, 0, 0.4);
+  border-left: 1rem solid rgb(0, 255, 0);
+  border-radius: 0.25rem;
+}
+
+.form-container form .safety .deny p,
+.form-container form .safety .success p {
   color: white;
   padding: 0.5rem 0;
 }

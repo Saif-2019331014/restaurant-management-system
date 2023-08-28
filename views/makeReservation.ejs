@@ -14,6 +14,40 @@
 
     <!-- custom css file link  -->
     <link rel="stylesheet" href="css/style.css" />
+    <style>
+      .cart {
+        position: relative;
+        display: inline-block;
+        width: 3rem;
+        /* height: 28px; */
+        height: auto;
+        /* overflow: hidden; */
+        .material-icons {
+          position: relative;
+          top: .4rem;
+          z-index: 1;
+          font-size: 24px;
+          color: black;
+        }
+        .count {
+          position: absolute;
+          top: -.5rem;
+          right: 0;
+          z-index: 2;
+          font-size: 11px;
+          border-radius: 50%;
+          background: #d60b28;
+          width: 16px;
+          height: 16px;
+          line-height:16px;
+          display: block;
+          text-align: center;
+          color: white;
+          font-family: 'Roboto', sans-serif;
+          font-weight: bold;
+        }
+      }
+    </style>
   </head>
   <body>
     <div class="loader">
@@ -28,12 +62,22 @@
           <nav class="navbar">
             <a href="home">Home</a>
             <a href="menu">Menu</a>
+            <a href="cart">
+              <div class="cart">
+                <% if(cart.length > 0) { %>
+                <span class="count"><%= cart.length %></span>
+                <%}%>
+                <i class="fa-solid fa-cart-shopping material-icons"></i>
+                <!--   <span class="count">1</span> -->
+                <!-- <i class="material-icons">shopping_cart</i> -->
+              </div>
+            </a>
               <div class="dropdown">
                 <button type="button" onclick="expand()" class="dropbtn">
                   Hi <%=user.firstname %>
                 </button>
                 <div id="myDropdown" class="dropdown-content">
-                  <a href="cart">Your cart</a>
+                  <!-- <a href="cart">Your cart</a> -->
                   <a href="orders">Your orders</a>
                   <a href="makeReservation">Reserve table</a>
                   <a href="logout">Logout</a>
@@ -74,7 +118,18 @@
             required
             placeholder="datetime-local"
           />
-          <button type="submit" name="submit" class="btn"><span>find a table </span></button>
+          <button type="submit" name="submit" class="btn"><span>Reserve a table </span></button>
+          <%if(msg.length > 0) {
+            if(msg === 'Reservation failed! No table available right now.') {%>
+            <div class="deny">
+              <p><%=msg%></p>
+            </div>
+            <%} else {%>
+            <div class="success">
+              <p><%=msg%></p>
+            </div>
+            <%}%>
+          <%}%>
         </div>
       </form>
     </section>
